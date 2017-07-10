@@ -1,3 +1,20 @@
+# Setup
+
+these are the pre requicits you will need installed on your system before you can begin building
+
+###NodeJS
+
+https://docs.npmjs.com/
+
+###angular-cli 
+
+npm install -g angular-cli
+
+###grunt-cli
+
+npm install -g grunt-cli
+
+
 # AngularGetTest
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.28.3.
