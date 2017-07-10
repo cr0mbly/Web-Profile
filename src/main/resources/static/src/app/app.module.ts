@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
-
-//local imports
+//
+// //local imports
 import { AppComponent } from './app.component';
 import { UserComponent} from './user/user.component'
 import {SharedServices} from './sharedModules/SharedServices'
@@ -56,7 +56,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes)
 
   ],
-  exports: [RouterModule],
   providers: [UserService,SharedServices],
   bootstrap: [AppComponent]
 })
