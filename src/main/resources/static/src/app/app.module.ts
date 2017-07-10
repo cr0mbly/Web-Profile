@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { UserComponent} from './user/user.component'
 import {SharedServices} from './sharedModules/SharedServices'
 import {UserService} from './user/user.services'
-import {sideNavComponent} from './headerRouter/headerRouter.component'
+import {navRouterLayout} from './navRouterLayout/navRouterLayout.component'
 import {Landing} from "./landing/landing.component";
 import {Link1} from "./link1/link1.component";
 import {SharedBody} from "./sharedBodyView/sharedBody.component";
@@ -34,7 +34,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     UserComponent,
-    sideNavComponent,
+    navRouterLayout,
     Landing,
     SharedBody,
     Link1

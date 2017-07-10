@@ -4,13 +4,13 @@ import {SharedServices} from "../sharedModules/SharedServices";
 
 @Component({
   moduleId : module.id,
-  selector: 'side-nav-component',
-  templateUrl: 'headerRouter.component.html',
-  styleUrls: ['headerRouter.component.css'],
+  selector: 'nav-router-layout',
+  templateUrl: 'app/navRouterLayout/navRouterLayout.component.html',
+  styleUrls: ['app/navRouterLayout/navRouterLayout.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 
-export class sideNavComponent{
+export class navRouterLayout{
 
   private response;
 
