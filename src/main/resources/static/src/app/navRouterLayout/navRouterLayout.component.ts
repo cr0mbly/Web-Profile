@@ -5,24 +5,24 @@ import {SharedServices} from "../sharedModules/SharedServices";
 @Component({
   moduleId : module.id,
   selector: 'nav-router-layout',
-  templateUrl: 'app/navRouterLayout/navRouterLayout.component.html',
-  styleUrls: ['app/navRouterLayout/navRouterLayout.component.css'],
+  templateUrl: 'navRouterLayout.component.html',
+  styleUrls: ['navRouterLayout.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 
 export class navRouterLayout{
 
-  private response;
+  private mobile;
 
 
   constructor(private sharedServices:SharedServices){
-    this.sharedServices.mobileViewObservable.subscribe(data => this.response = data);
+    this.sharedServices.mobileViewObservable.subscribe(data => this.mobile = data);
 
   }
 
   private yo(){
-    console.log(this.response);
-    return this.response;
+    console.log(this.mobile);
+    return this.mobile;
   }
 
 }

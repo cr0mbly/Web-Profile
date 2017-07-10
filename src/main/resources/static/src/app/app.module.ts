@@ -6,7 +6,7 @@ import { NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
+import {MdDialog, MdDialogRef,MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
 //
 // //local imports
 import { AppComponent } from './app.component';
@@ -45,6 +45,8 @@ const appRoutes: Routes = [
     HttpModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MdDialog,
+    MdDialogRef,
     MdButtonModule,
     MdSidenavModule,
     MdMenuModule,

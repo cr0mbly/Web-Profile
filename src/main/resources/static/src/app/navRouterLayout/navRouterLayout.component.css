@@ -1,4 +1,6 @@
 .toolbar-spacer {
   margin-left: 20px;
 }
-
+.header-spacer {
+  flex: 1 1 auto;
+}

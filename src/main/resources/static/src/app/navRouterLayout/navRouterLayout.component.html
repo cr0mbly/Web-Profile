@@ -1,10 +1,15 @@
 <md-sidenav-container fullscreen>
   <md-toolbar>
-    <button *ngIf="response" (click)="sidenav.toggle()" md-button>
+    <button *ngIf="mobile" (click)="sidenav.toggle()" md-button>
       <md-icon>view_list</md-icon>
     </button>
     <span class="toolbar-spacer">Aidans Page</span>
-    <md-toolbar-row *ngIf="!response">
+    <span class="header-spacer"></span>
+    <button (click)="sidenav.toggle()" md-button>
+      <md-icon>create</md-icon>
+      <span *ngIf="!mobile">Sign up</span>
+    </button>
+    <md-toolbar-row *ngIf="!mobile">
       <button md-button routerLink="/link-1" routerLinkActive="active" class="toolbar-spacer">Link 1</button>
       <button md-button class="toolbar-spacer">Link 2</button>
       <button md-button class="toolbar-spacer">Link 3</button>
