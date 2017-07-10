@@ -1,0 +1,50 @@
+<md-sidenav-container fullscreen>
+  <md-toolbar>
+    <button *ngIf="response" (click)="sidenav.toggle()" md-button>
+      <md-icon>view_list</md-icon>
+    </button>
+    <span class="toolbar-spacer">Aidans Page</span>
+    <md-toolbar-row *ngIf="!response">
+      <button md-button routerLink="/link-1" routerLinkActive="active" class="toolbar-spacer">Link 1</button>
+      <button md-button class="toolbar-spacer">Link 2</button>
+      <button md-button class="toolbar-spacer">Link 3</button>
+      <button md-button class="toolbar-spacer">Link 4</button>
+    </md-toolbar-row>
+  </md-toolbar>
+
+  <md-sidenav #sidenav mode="over" opened="false">
+    <md-list>
+      <h3>links:</h3>
+      <md-list-item>
+        <button md-button>
+          <md-icon>add</md-icon>
+          <span>this is text</span>
+        </button>
+      </md-list-item>
+      <br>
+      <md-list-item class="side-nav-container">
+        <button md-button>
+          <md-icon>add</md-icon>
+          <span>this is text</span>
+        </button>
+      </md-list-item>
+      <br>
+      <md-list-item>
+        <button md-button>
+          <md-icon>add</md-icon>
+          <span>this is text</span>
+        </button>
+      </md-list-item>
+      <br>
+      <md-divider></md-divider>
+      <br>
+      <md-list-item>
+        <button md-button>
+          <md-icon>add</md-icon>
+          <span>this is text</span>
+        </button>
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+  <router-outlet></router-outlet>
+</md-sidenav-container>

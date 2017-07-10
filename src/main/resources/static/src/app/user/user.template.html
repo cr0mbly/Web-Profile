@@ -1,0 +1,33 @@
+<ul>
+  <li>
+    <form ([formGroup])="currentUser" (ngSubmit)="onSubmit(currentUser)" novalidate>
+      <input name="name"  required>
+      <input name="username" >
+      <input name="email">
+      <form ([formGroup])="address">
+        <input name="street" >
+        <input name="suite" >
+        <input name="city" >
+        <input name="zipcode" >
+        <form ([formGroup])="geo">
+          <input name="latitude" >
+          <input name="longitude" >
+        </form>
+      </form>
+
+      <button type="submit">Submit</button>
+    </form>
+  </li>
+  <li *ngFor="let user of users">
+    <ul>     <li>ID is : {{user.id}}</li>
+      <li>name is : {{user.name}}</li>
+      <li>username is : {{user.username}}</li>
+      <li>email is : {{user.email}}</li>
+      <li>street is : {{user.address.street}}</li>
+      <li>suite is : {{user.address.suite}}</li>
+      <li>city is : {{user.address.city}}</li>
+      <li>zipcode is : {{user.address.zipcode}}</li>
+      <li>latitude,longitude is : {{user.address.geo.lat}}, {{user.address.geo.lng}}</li>
+    </ul>
+  </li>
+</ul>
