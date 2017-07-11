@@ -3,9 +3,8 @@ import { BrowserModule} from '@angular/platform-browser';
 import { RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { ReactiveFormsModule } from '@angular/forms';
 import {MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
 //
 // //local imports
@@ -20,6 +19,7 @@ import {SharedBody} from "./sharedBodyView/sharedBody.component";
 import {LoginDialog} from "./dialogs/loginDialog/loginDialog";
 
 
+// Route mapping
 const appRoutes: Routes = [
   { path : '', component: SharedBody},
   { path: 'link-1', component: Link1 },
@@ -43,6 +43,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,

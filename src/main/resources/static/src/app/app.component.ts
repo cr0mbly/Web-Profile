@@ -15,8 +15,6 @@ export class AppComponent {
 
   constructor(private sharedServices:SharedServices){}
 
-  // @ViewChild('sidenav') sidenav: MdSidenav;
-  //
   private resizeTimeout;
 
   @HostListener('window:resize')
