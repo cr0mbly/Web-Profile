@@ -1,6 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import 'hammerjs';
 import {SharedServices} from "../sharedModules/SharedServices";
+import {LoginDialog} from "../dialogs/loginDialog/loginDialog";
+import {MdDialog} from "@angular/material";
 
 @Component({
   moduleId : module.id,
@@ -15,14 +16,14 @@ export class navRouterLayout{
   private mobile;
 
 
-  constructor(private sharedServices:SharedServices){
+  constructor(private sharedServices:SharedServices, public dialog: MdDialog){
     this.sharedServices.mobileViewObservable.subscribe(data => this.mobile = data);
 
   }
 
-  private yo(){
-    console.log(this.mobile);
-    return this.mobile;
+  openDialog() {
+    let dialogRef = this.dialog.open(LoginDialog);
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
-
 }

@@ -6,7 +6,7 @@ import { NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MdDialog, MdDialogRef,MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
+import {MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
 //
 // //local imports
 import { AppComponent } from './app.component';
@@ -17,6 +17,7 @@ import {navRouterLayout} from './navRouterLayout/navRouterLayout.component'
 import {Landing} from "./landing/landing.component";
 import {Link1} from "./link1/link1.component";
 import {SharedBody} from "./sharedBodyView/sharedBody.component";
+import {LoginDialog} from "./dialogs/loginDialog/loginDialog";
 
 
 const appRoutes: Routes = [
@@ -37,7 +38,8 @@ const appRoutes: Routes = [
     navRouterLayout,
     Landing,
     SharedBody,
-    Link1
+    Link1,
+    LoginDialog
   ],
   imports: [
     BrowserModule,
@@ -45,8 +47,6 @@ const appRoutes: Routes = [
     HttpModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MdDialog,
-    MdDialogRef,
     MdButtonModule,
     MdSidenavModule,
     MdMenuModule,
@@ -55,10 +55,11 @@ const appRoutes: Routes = [
     MdRippleModule,
     MdToolbarModule,
     MdCardModule,
-    RouterModule.forRoot(appRoutes)
-
+    RouterModule.forRoot(appRoutes),
+    MdDialogModule
   ],
   providers: [UserService,SharedServices],
+  entryComponents : [LoginDialog],
   bootstrap: [AppComponent]
 })
 export class AppModule {
