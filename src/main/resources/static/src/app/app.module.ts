@@ -6,7 +6,7 @@ import { NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
+import {MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
 //
 // //local imports
 import { AppComponent } from './app.component';
@@ -56,7 +56,8 @@ const appRoutes: Routes = [
     MdToolbarModule,
     MdCardModule,
     RouterModule.forRoot(appRoutes),
-    MdDialogModule
+    MdDialogModule,
+    MdTabsModule
   ],
   providers: [UserService,SharedServices],
   entryComponents : [LoginDialog],

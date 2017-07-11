@@ -1,6 +1,66 @@
-<h1 md-dialog-title>Dialog</h1>
-<div md-dialog-content>What would you like to do?</div>
-<div md-dialog-actions>
-  <button md-button md-dialog-close="Option 1">Option 1</button>
-  <button md-button md-dialog-close="Option 2">Option 2</button>
-</div>
+<md-tab-group  dynamicHeight>
+  <md-tab label="Login">
+    <br>
+    <md-list>
+      <md-list-item>
+        <md-input-container class ="input-full-width" md-line>
+          <input mdInput placeholder="Login/Username">
+        </md-input-container>
+      </md-list-item>
+      <br>
+      <md-list-item>
+        <md-input-container class ="input-full-width" md-line>
+          <input mdInput placeholder="Password">
+        </md-input-container>
+      </md-list-item>
+      <br>
+      <md-list-item>
+        <button md-button>
+          <span>forgot your password?</span>
+        </button>
+      </md-list-item>
+    </md-list>
+
+  </md-tab>
+  <md-tab label="Sign Up">
+    <br>
+    <md-list-item>
+      <md-input-container>
+        <input mdInput placeholder="First Name">
+      </md-input-container>
+    </md-list-item>
+    <md-list-item>
+      <md-input-container>
+        <input mdInput placeholder="Last Name">
+      </md-input-container>
+    </md-list-item>
+    <br>
+    <md-list-item>
+      <md-input-container class ="input-full-width">
+        <input mdInput placeholder="Email Address">
+      </md-input-container>
+    </md-list-item>
+    <md-list-item>
+      <md-input-container class ="input-full-width">
+        <input mdInput placeholder="Username">
+      </md-input-container>
+    </md-list-item>
+    <br>
+    <md-list-item>
+      <md-input-container class ="input-full-width">
+        <input mdInput placeholder="Password">
+      </md-input-container>
+    </md-list-item>
+    <br>
+    <md-list-item>
+      <md-input-container class ="input-full-width">
+        <input mdInput placeholder="RepeaPassword">
+      </md-input-container>
+    </md-list-item>
+    <md-list-item>
+      <button md-button>
+        <span>Sign up!</span>
+      </button>
+    </md-list-item>
+  </md-tab>
+</md-tab-group>
