@@ -43,7 +43,7 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
 }
 
-task buildDB(){
+task buildTmpDirectories(){
     doLast() {
         def localDB = new File("${projectDir}/tmp/DB/users")
         def localDBLog = new File("${projectDir}/tmp/DB/logs")
@@ -57,7 +57,7 @@ task buildDB(){
 task startLocalDB(){
     doLast() {
         exec {
-            commandLine "mongod", "--port", "27017", "--dbpath", "${projectDir}/tmp/DB/users"
+            commandLine  "mongod", "--fork", "--logpath", "${projectDir}/tmp/DB/logs/mongodb.log", "--port", "27017", "--dbpath", "${projectDir}/tmp/DB/users"
         }
         println("local database started")
     }
