@@ -12,7 +12,7 @@ var http_1 = require('@angular/http');
 var forms_2 = require('@angular/forms');
 var app_component_1 = require('./app.component');
 var user_component_1 = require('./user/user.component');
-var user_services_1 = require('./user/user.services');
+var user_services_1 = require('./sharedModules/restQueryService.ts');
 var AppModule = (function () {
     function AppModule() {
     }

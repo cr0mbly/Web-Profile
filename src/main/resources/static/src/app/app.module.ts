@@ -9,14 +9,13 @@ import {MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule,
 //
 // //local imports
 import { AppComponent } from './app.component';
-import { UserComponent} from './user/user.component'
-import {SharedServices} from './sharedModules/SharedServices'
-import {UserService} from './user/user.services'
+import {RestQueryService} from './sharedModules/restQueryService'
 import {navRouterLayout} from './navRouterLayout/navRouterLayout.component'
 import {Landing} from "./landing/landing.component";
 import {Link1} from "./link1/link1.component";
 import {SharedBody} from "./sharedBodyView/sharedBody.component";
 import {LoginDialog} from "./dialogs/loginDialog/loginDialog";
+import {SharedServices} from "./sharedModules/SharedServices";
 
 
 // Route mapping
@@ -34,7 +33,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
     navRouterLayout,
     Landing,
     SharedBody,
@@ -60,7 +58,7 @@ const appRoutes: Routes = [
     MdDialogModule,
     MdTabsModule
   ],
-  providers: [UserService,SharedServices],
+  providers: [RestQueryService, SharedServices],
   entryComponents : [LoginDialog],
   bootstrap: [AppComponent]
 })

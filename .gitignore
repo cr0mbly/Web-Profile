@@ -24,6 +24,14 @@ nbdist/
 .nb-gradle/
 
 
-### Front end **
+### Front end ##
 
 node_modules/
+
+### Back end ###
+
+tmp/
+.gradle/3.5/fileContent/
+.gradle/3.5/taskHistory/jvmClassSignatures.bin
+src/main/java/com/cr0mbly/whereshouldibuy/controller/SecureController.java
+src/main/java/com/cr0mbly/whereshouldibuy/services/interfaces/
