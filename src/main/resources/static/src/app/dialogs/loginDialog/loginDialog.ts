@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MdDialogRef} from "@angular/material";
+import {CookieService} from 'angular2-cookie/core';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 
 import {RestQueryService} from '../../sharedModules/restQueryService'
@@ -10,6 +11,8 @@ import {RestQueryService} from '../../sharedModules/restQueryService'
   styleUrls : ['loginDialog.css'],
 })
 export class LoginDialog implements OnInit{
+
+  private response;
 
   loginForm: FormGroup = new FormGroup({
     username : new FormControl(),
@@ -24,17 +27,19 @@ export class LoginDialog implements OnInit{
     password : new FormControl('',Validators.minLength(8)),
     confirmPassword : new FormControl('',Validators.minLength(8))
   });
-  constructor(public dialogRef: MdDialogRef<LoginDialog>, private restService:RestQueryService) {}
+  constructor(public _dialogRef: MdDialogRef<LoginDialog>, private _restService:RestQueryService, private _cookieService:CookieService) {}
 
   doSignup(){
     console.log(this.singupForm.value)
   }
   doLogin(){
-    console.log(this.restService.login())
+
+    this._restService.login().subscribe(response => {
+      this._cookieService.put("jwt",response.jwt);
+    })
   }
 
   ngOnInit(){
-    console.log(this.restService.login());
   }
 }
 

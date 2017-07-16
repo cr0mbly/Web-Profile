@@ -1,12 +1,12 @@
 package com.cr0mbly.whereshouldibuy.controller;
 
 import com.cr0mbly.whereshouldibuy.dataModels.User;
+import com.cr0mbly.whereshouldibuy.dataModels.UserLoginCredentials;
 import com.cr0mbly.whereshouldibuy.services.interfaces.UserLoginService;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,23 +19,23 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/user")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class userLoginController {
 
     @Autowired
     private UserLoginService userService;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(@RequestBody User login) {
+    public String login(@RequestBody UserLoginCredentials login) {
 
-        if(login.getEmail() == null || login.getPassword() == null){
+        if(login.getUserID() == null || login.getPassword() == null){
             return "login not complete";
         }
 
-        String email = login.getEmail();
+        String userID = login.getUserID();
         String password = login.getPassword();
 
-
-        User user = userService.findByEmail(email);
+        User user = userService.findByUserID(userID);
 
         if(user == null){
             return "user not found";
@@ -49,8 +49,11 @@ public class userLoginController {
 
         }
 
-        return Jwts.builder().setSubject(email).claim("roles", "user").setIssuedAt(new Date())
+        String jwt =  Jwts.builder().setSubject(userID).claim("roles", "user").setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, "SECRETKEY_AIDANPLEASECHANGE").compact();
+
+
+        return  "{\"jwt\" : \"" + jwt + "\"}";
 
     }
 }

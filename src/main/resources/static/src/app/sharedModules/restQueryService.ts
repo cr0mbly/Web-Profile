@@ -15,10 +15,8 @@ export class RestQueryService {
   login() {
 
     let form = {
-      "firstName" : "Alice",
-      "lastName" : "Smith",
-      "email" : "alice.smith@gmail.com",
-      "password" : "password1"
+      "userID" : "cr0mbly",
+      "password" : "azqazq12",
     };
 
     let headers = new Headers({ 'Content-Type': 'application/json' });

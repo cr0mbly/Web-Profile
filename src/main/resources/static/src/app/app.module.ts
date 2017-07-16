@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule} from '@angular/core';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 import {MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
 //
 // //local imports
@@ -58,7 +59,7 @@ const appRoutes: Routes = [
     MdDialogModule,
     MdTabsModule
   ],
-  providers: [RestQueryService, SharedServices],
+  providers: [RestQueryService, SharedServices, CookieService],
   entryComponents : [LoginDialog],
   bootstrap: [AppComponent]
 })

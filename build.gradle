@@ -32,11 +32,19 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 
-    compile('org.springframework:spring-webmvc:4.1.6.RELEASE')
-    testCompile('org.springframework:spring-webmvc:4.1.6.RELEASE')
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '4.2.0.RELEASE'
+
+    compile ('org.springframework.security:spring-security-web:4.2.0.RELEASE')
+    compile ('org.springframework.security:spring-security-web:4.2.0.RELEASE')
+
+    compile('org.springframework:spring-webmvc:4.2.0.RELEASE')
+    testCompile('org.springframework:spring-webmvc:4.2.0.RELEASE')
 
     compile(group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2')
     testCompile(group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2')
+
+    compile('com.google.code.gson:gson:1.7.2')
+    testCompile('com.google.code.gson:gson:1.7.2')
 }
 
 task wrapper(type: Wrapper) {
@@ -57,7 +65,7 @@ task buildTmpDirectories(){
 task startLocalDB(){
     doLast() {
         exec {
-            commandLine  "mongod", "--fork", "--logpath", "${projectDir}/tmp/DB/logs/mongodb.log", "--port", "27017", "--dbpath", "${projectDir}/tmp/DB/users"
+            commandLine  "mongod", "--port", "27017", "--dbpath", "${projectDir}/tmp/DB/users"
         }
         println("local database started")
     }
@@ -81,4 +89,4 @@ task stopDB(type:Exec) {
 //task runFullSetup(dependsOn : [startLocalDB, run]){
 //}
 
-run.dependsOn startLocalDB
+//run.dependsOn startLocalDB

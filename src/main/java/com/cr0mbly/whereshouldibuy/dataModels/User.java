@@ -5,11 +5,19 @@ package com.cr0mbly.whereshouldibuy.dataModels;
  */
 public class User {
 
+    private String userID;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
 
+    public User(String userID, String firstName, String lastName, String email, String password) {
+        this.email = email;
+        this.password = password;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.userID = userID;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -41,6 +49,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
 }
