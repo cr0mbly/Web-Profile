@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MdDialogRef} from "@angular/material";
 import {CookieService} from 'angular2-cookie/core';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
-
+import { Router } from '@angular/router'
 import {RestQueryService} from '../../sharedModules/restQueryService'
 
 @Component({
@@ -10,27 +10,30 @@ import {RestQueryService} from '../../sharedModules/restQueryService'
   templateUrl: 'loginDialog.html',
   styleUrls : ['loginDialog.css'],
 })
-export class LoginDialog implements OnInit{
+export class LoginDialog{
 
   loginForm: FormGroup = new FormGroup({
-    username : new FormControl(),
+    userID : new FormControl(),
     password : new FormControl()
   });
 
   singupForm: FormGroup = new FormGroup({
-    firstname : new FormControl('', Validators.minLength(2)),
-    lastname : new FormControl('',Validators.minLength(2)),
+    firstName : new FormControl('', Validators.minLength(2)),
+    lastName : new FormControl('',Validators.minLength(2)),
     email : new FormControl('',Validators.email),
-    username : new FormControl('',Validators.maxLength(64)),
+    userID : new FormControl('',Validators.maxLength(64)),
     password : new FormControl('',Validators.minLength(8)),
     confirmPassword : new FormControl('',Validators.minLength(8))
   });
-  constructor(public _dialogRef: MdDialogRef<LoginDialog>, private _restService:RestQueryService, private _cookieService:CookieService) {}
+  constructor(public _dialogRef: MdDialogRef<LoginDialog>, private _restService:RestQueryService,
+              private _cookieService:CookieService, private _router:Router) {}
 
   doSignup(){
     console.log(this.singupForm.value);
     this._restService.signUp(this.singupForm.value).subscribe(response => {
       console.log(response);
+
+
     })
 
   }
@@ -38,10 +41,9 @@ export class LoginDialog implements OnInit{
 
     this._restService.login(this.loginForm.value).subscribe(response => {
       this._cookieService.put("jwt",response.jwt);
-    })
-  }
-
-  ngOnInit(){
+      this._cookieService.put("userID",response.userID);
+    });
+    this._router.navigate(['/profile/' + this._cookieService.get("userID")])
   }
 }
 

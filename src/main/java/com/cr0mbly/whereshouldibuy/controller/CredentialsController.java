@@ -29,6 +29,7 @@ public class CredentialsController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestBody UserLoginCredentials login) {
+        JsonObject returnObj = new JsonObject();
 
         if(login.getUserID() == null || login.getPassword() == null){
             return "login not complete";
@@ -54,9 +55,9 @@ public class CredentialsController {
         String jwt =  Jwts.builder().setSubject(userID).claim("roles", "user").setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, "SECRETKEY_AIDANPLEASECHANGE").compact();
 
-
-        return  "{\"jwt\" : \"" + jwt + "\"}";
-
+        returnObj.addProperty("jwt", jwt);
+        returnObj.addProperty("userID", userID);
+        return  returnObj.toString();
     }
 
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
@@ -85,8 +86,14 @@ public class CredentialsController {
 
         userService.save(user);
 
-        returnObj.addProperty("message", "logging in.....");
+        returnObj.addProperty("redirect", "/profile/" + user.getUserID());
         return returnObj.toString();
+
+    }
+
+    @RequestMapping(value = "/profile/{userID}", method = RequestMethod.GET)
+    public User userProfile(@PathVariable("userID") String userId){
+        return userService.findByUserID(userId);
 
     }
 }

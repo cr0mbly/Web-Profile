@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {CookieService} from 'angular2-cookie/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -11,10 +12,11 @@ export class RestQueryService {
   private backendURLS = {
     "user" : "/user/",
     "signUp" : "signUp/",
-    "login" : "login/"
+    "login" : "login/",
+    "profile" : "profile/"
   };
 
-  constructor(private _http:Http) {
+  constructor(private _http:Http, private _cookies:CookieService) {
   };
 
   signUp(signUpForm) {
@@ -31,5 +33,14 @@ export class RestQueryService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.login , loginForm,options).map(res => res.json());
+  };
+
+  profile() {
+
+    let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
+    let options = new RequestOptions({ headers: headers });
+
+    return this._http.get(this.backEndHost + this.backendURLS.user +
+      this.backendURLS.profile + this._cookies.get("userID"),options).map(res => res.json());
   };
 }

@@ -7,13 +7,13 @@ import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import {MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
-//
+
 // //local imports
 import { AppComponent } from './app.component';
 import {RestQueryService} from './sharedModules/restQueryService'
 import {navRouterLayout} from './navRouterLayout/navRouterLayout.component'
 import {Landing} from "./landing/landing.component";
-import {Link1} from "./link1/link1.component";
+import {profile} from "./profile/profile.component";
 import {SharedBody} from "./sharedBodyView/sharedBody.component";
 import {LoginDialog} from "./dialogs/loginDialog/loginDialog";
 import {SharedServices} from "./sharedModules/SharedServices";
@@ -22,7 +22,7 @@ import {SharedServices} from "./sharedModules/SharedServices";
 // Route mapping
 const appRoutes: Routes = [
   { path : '', component: SharedBody},
-  { path: 'link-1', component: Link1 },
+  { path: 'profile/:userID', component: profile },
   { path: 'hello', component: Landing ,children: [
     { path: 'test', component: SharedBody }
   ]}
@@ -37,7 +37,7 @@ const appRoutes: Routes = [
     navRouterLayout,
     Landing,
     SharedBody,
-    Link1,
+    profile,
     LoginDialog
   ],
   imports: [
