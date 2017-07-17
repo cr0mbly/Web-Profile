@@ -1,0 +1,14 @@
+{
+  "dev" : {
+    "backEndHost" : "http://localhost:8080",
+    "User" : "/user/",
+    "signUp" : "signUp/",
+    "login" : "login/"
+  },
+  "prod" : {
+    "backEndHost" : "http://localhost:8080",
+    "User" : "/user/",
+    "signUp" : "signUp/",
+    "login" : "login/"
+  }
+}

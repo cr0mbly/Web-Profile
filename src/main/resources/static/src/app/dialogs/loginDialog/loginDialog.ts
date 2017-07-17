@@ -12,8 +12,6 @@ import {RestQueryService} from '../../sharedModules/restQueryService'
 })
 export class LoginDialog implements OnInit{
 
-  private response;
-
   loginForm: FormGroup = new FormGroup({
     username : new FormControl(),
     password : new FormControl()
@@ -30,11 +28,15 @@ export class LoginDialog implements OnInit{
   constructor(public _dialogRef: MdDialogRef<LoginDialog>, private _restService:RestQueryService, private _cookieService:CookieService) {}
 
   doSignup(){
-    console.log(this.singupForm.value)
+    console.log(this.singupForm.value);
+    this._restService.signUp(this.singupForm.value).subscribe(response => {
+      console.log(response);
+    })
+
   }
   doLogin(){
 
-    this._restService.login().subscribe(response => {
+    this._restService.login(this.loginForm.value).subscribe(response => {
       this._cookieService.put("jwt",response.jwt);
     })
   }

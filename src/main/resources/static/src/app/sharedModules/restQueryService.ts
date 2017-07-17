@@ -6,22 +6,30 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class RestQueryService {
 
+  private backEndHost : string = "http://localhost:8080";
+
+  private backendURLS = {
+    "user" : "/user/",
+    "signUp" : "signUp/",
+    "login" : "login/"
+  };
+
   constructor(private _http:Http) {
   };
 
-  getposts(uri) {
-    return this._http.get(uri).map(res => res.json());
-  };
-  login() {
-
-    let form = {
-      "userID" : "cr0mbly",
-      "password" : "azqazq12",
-    };
+  signUp(signUpForm) {
 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this._http.post('http://localhost:8080/user/login/', form,options).map(res => res.json());
+    return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.signUp , signUpForm,options).map(res => res.json());
   };
-};
+
+  login(loginForm) {
+
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+
+    return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.login , loginForm,options).map(res => res.json());
+  };
+}
