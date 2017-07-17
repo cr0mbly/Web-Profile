@@ -1,6 +1,6 @@
 //library imports
 import { BrowserModule} from '@angular/platform-browser';
-import { RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes, CanActivate} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule} from '@angular/core';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
@@ -16,16 +16,16 @@ import {Landing} from "./landing/landing.component";
 import {profile} from "./profile/profile.component";
 import {SharedBody} from "./sharedBodyView/sharedBody.component";
 import {LoginDialog} from "./dialogs/loginDialog/loginDialog";
-import {SharedServices} from "./sharedModules/SharedServices";
+import {SharedServices} from "./sharedModules/sharedServices";
+import {AuthorisedGuard} from "./sharedModules/authorisedGuard"
 
 
 // Route mapping
 const appRoutes: Routes = [
   { path : '', component: SharedBody},
-  { path: 'profile/:userID', component: profile },
-  { path: 'hello', component: Landing ,children: [
-    { path: 'test', component: SharedBody }
-  ]}
+  { path: 'profile/:userID',
+    component: profile,
+    canActivate: [AuthorisedGuard]},
 ];
 
 
@@ -59,7 +59,7 @@ const appRoutes: Routes = [
     MdDialogModule,
     MdTabsModule
   ],
-  providers: [RestQueryService, SharedServices, CookieService],
+  providers: [RestQueryService, SharedServices, CookieService, AuthorisedGuard],
   entryComponents : [LoginDialog],
   bootstrap: [AppComponent]
 })

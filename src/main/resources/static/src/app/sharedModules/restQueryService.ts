@@ -32,7 +32,12 @@ export class RestQueryService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
 
-    return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.login , loginForm,options).map(res => res.json());
+    return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.login , loginForm,options)
+      .map(res => res.json()).subscribe(response => {
+        this._cookieService.put("jwt",response.jwt);
+        this._cookieService.put("userID",response.userID);
+        this._sharedServices.loggedIn(true);
+      });
   };
 
   profile() {

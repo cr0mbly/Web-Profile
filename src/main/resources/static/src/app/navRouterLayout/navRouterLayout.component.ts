@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {SharedServices} from "../sharedModules/SharedServices";
+import {SharedServices} from "../sharedModules/sharedServices";
 import {LoginDialog} from "../dialogs/loginDialog/loginDialog";
 import {MdDialog} from "@angular/material";
 

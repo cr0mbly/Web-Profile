@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MdDialogRef} from "@angular/material";
 import {CookieService} from 'angular2-cookie/core';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import { Router } from '@angular/router'
 import {RestQueryService} from '../../sharedModules/restQueryService'
+import {SharedServices} from '../../sharedModules/sharedServices'
 
 @Component({
   selector: 'login-dialog',
@@ -26,10 +27,9 @@ export class LoginDialog{
     confirmPassword : new FormControl('',Validators.minLength(8))
   });
   constructor(public _dialogRef: MdDialogRef<LoginDialog>, private _restService:RestQueryService,
-              private _cookieService:CookieService, private _router:Router) {}
+              private _router:Router, private _sharedServices: SharedServices, private _cookieService: CookieService) {}
 
   doSignup(){
-    console.log(this.singupForm.value);
     this._restService.signUp(this.singupForm.value).subscribe(response => {
       console.log(response);
 
@@ -38,12 +38,13 @@ export class LoginDialog{
 
   }
   doLogin(){
-
-    this._restService.login(this.loginForm.value).subscribe(response => {
-      this._cookieService.put("jwt",response.jwt);
-      this._cookieService.put("userID",response.userID);
-    });
-    this._router.navigate(['/profile/' + this._cookieService.get("userID")])
+    this._restService.login(this.loginForm.value);
+    
+    if(this._sharedServices.loggedInState){
+      this._router.navigate(['/profile/' + this._cookieService.get("userID")])
+    }else {
+      console.log("failed credentials");
+    }
   }
 }
 
