@@ -1,6 +1,49 @@
 <div class="app-content" fullscreen>
   <md-card>
-    user : {{user.userID}}
+    <form (ngSubmit)="submitUpdate($event)">
+      <md-list [formGroup]="updateForm">
+        <md-list-item>
+          <md-input-container>
+            <input mdInput formControlName="firstName" [ngClass]="{ disabled : editFields == false }" placeholder="First Name" type="text" [readonly]="!editFields">
+          </md-input-container>
+        </md-list-item>
+        <md-list-item>
+          <md-input-container>
+            <input mdInput formControlName="lastName" [ngClass]="{ disabled : editFields == false }" placeholder="Last Name" type="text" [readonly]="!editFields">
+          </md-input-container>
+        </md-list-item>
+        <br>
+        <md-list-item>
+          <md-input-container class ="input-full-width">
+            <input mdInput formControlName="email" [ngClass]="{ disabled : editFields == false }" placeholder="Email Address" type="email" [readonly]="!editFields">
+          </md-input-container>
+        </md-list-item>
+        <md-list-item>
+          <md-input-container class ="input-full-width">
+            <input mdInput formControlName="userID" [ngClass]="{ disabled : editFields == false }" placeholder="Username" type="text" [readonly]="!editFields">
+          </md-input-container>
+        </md-list-item>
+        <br>
+        <md-list-item>
+          <md-input-container class ="input-full-width">
+            <input mdInput formControlName="password" [ngClass]="{ disabled : editFields == false }" placeholder="Password" type="password" [readonly]="!editFields">
+          </md-input-container>
+        </md-list-item>
+        <br>
+        <md-list-item>
+          <md-input-container class ="input-full-width">
+            <input mdInput formControlName="confirmPassword" [ngClass]="{ disabled : editFields == false }" placeholder="Confirm Password" type="password" [readonly]="!editFields">
+          </md-input-container>
+        </md-list-item>
+        <md-list-item>
+          <button md-button (click)="submitUpdate()">
+            <span *ngIf="!editFields">update profile</span>
+            <span *ngIf="editFields">submit update</span>
+          </button>
+          </md-list-item>
+        </md-list>
+      </form>
+
   </md-card>
 
 </div>

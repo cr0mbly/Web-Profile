@@ -3,6 +3,8 @@ import {CookieService} from 'angular2-cookie/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import {SharedServices} from './sharedServices'
+
 
 @Injectable()
 export class RestQueryService {
@@ -16,7 +18,7 @@ export class RestQueryService {
     "profile" : "profile/"
   };
 
-  constructor(private _http:Http, private _cookies:CookieService) {
+  constructor(private _http:Http, private _cookies:CookieService, private _sharedServices:SharedServices) {
   };
 
   signUp(signUpForm) {
@@ -34,10 +36,18 @@ export class RestQueryService {
 
     return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.login , loginForm,options)
       .map(res => res.json()).subscribe(response => {
-        this._cookieService.put("jwt",response.jwt);
-        this._cookieService.put("userID",response.userID);
+        this._cookies.put("jwt",response.jwt);
+        this._cookies.put("userID",response.userID);
         this._sharedServices.loggedIn(true);
       });
+  };
+
+  updateProfile(updateForm){
+    let headers = new Headers([{ 'Content-Type': 'application/json' },
+                               { 'authorization': 'Bearer ' + this._cookies.get("jwt")}]);
+    let options = new RequestOptions({ headers: headers });
+
+    return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.profile , updateForm,options).map(res => res.json());
   };
 
   profile() {

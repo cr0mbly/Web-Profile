@@ -2,15 +2,16 @@ package com.cr0mbly.whereshouldibuy.controller;
 
 import com.cr0mbly.whereshouldibuy.dataModels.authentication.User;
 import com.cr0mbly.whereshouldibuy.dataModels.authentication.UserLoginCredentials;
-import com.cr0mbly.whereshouldibuy.services.interfaces.UserLoginService;
+import com.cr0mbly.whereshouldibuy.dataModels.authentication.UserProfile;
+import com.cr0mbly.whereshouldibuy.repository.UserLoginRepo;
 import com.google.gson.JsonObject;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by HoulihanA on 12/07/2017.
@@ -21,7 +22,7 @@ import java.util.Date;
 public class CredentialsController {
 
     @Autowired
-    private UserLoginService userService;
+    private UserLoginRepo userLoginRepo;
 
     private static final String EMAILREGEX =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -38,7 +39,7 @@ public class CredentialsController {
         String userID = login.getUserID();
         String password = login.getPassword();
 
-        User user = userService.findByUserID(userID);
+        User user = userLoginRepo.findByUserID(userID);
 
         if(user == null){
             return "user not found";
@@ -57,6 +58,7 @@ public class CredentialsController {
 
         returnObj.addProperty("jwt", jwt);
         returnObj.addProperty("userID", userID);
+
         return  returnObj.toString();
     }
 
@@ -64,7 +66,7 @@ public class CredentialsController {
     public String signUp(@RequestBody User user) {
         JsonObject returnObj = new JsonObject();
 
-        if(!(userService.findByEmail(user.getUserID()) == null)){
+        if(!(userLoginRepo.findByEmail(user.getUserID()) == null)){
             returnObj.addProperty("message", "username already taken");
             return returnObj.toString();
         }
@@ -74,17 +76,12 @@ public class CredentialsController {
             return returnObj.toString();
         }
 
-        if(!((userService.findByEmail(user.getEmail()))  == null)){
+        if(!((userLoginRepo.findByEmail(user.getEmail()))  == null)){
             returnObj.addProperty("message", "email already in use try resetting password");
             return returnObj.toString();
         }
 
-        if(!user.getPassword().equals(user.getConfirmPassword())){
-            returnObj.addProperty("message", "password insconsistant please check to make sure they're matching.");
-            return returnObj.toString();
-        }
-
-        userService.save(user);
+        userLoginRepo.save(user);
 
         returnObj.addProperty("redirect", "/profile/" + user.getUserID());
         return returnObj.toString();
@@ -92,8 +89,36 @@ public class CredentialsController {
     }
 
     @RequestMapping(value = "/profile/{userID}", method = RequestMethod.GET)
-    public User userProfile(@PathVariable("userID") String userId){
-        return userService.findByUserID(userId);
+    public UserProfile Profile(@PathVariable("userID") String userId){
+        User currentUser = userLoginRepo.findByUserID(userId);
+        String saltedPassword = saltyString(currentUser.getPassword().length());
+        return new UserProfile(currentUser.getUserID()
+                ,currentUser.getFirstName(),currentUser.getLastName(),currentUser.getEmail(),saltedPassword);
+
+    }
+
+    @RequestMapping(value = "/profile/{userID}", method = RequestMethod.POST)
+    public String updateProfile(@RequestBody UserProfile profile){
+        JsonObject returnObj = new JsonObject();
+        User currentUser = userLoginRepo.findByUserID(profile.getUserID());
+
+        User updatedUser = new User(profile.getUserID(),profile.getFirstName(),profile.getLastName(),profile.getEmail(),
+                currentUser.getPassword(), currentUser.getLoggedIn());
+
+        userLoginRepo.save(updatedUser);
+        returnObj.addProperty("result", "updated User!");
+        return returnObj.toString();
+    }
+
+    private String saltyString(int length) {
+        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+        StringBuilder salt = new StringBuilder();
+        Random rnd = new Random();
+        while (salt.length() < length) { // length of the random string.
+            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
+            salt.append(SALTCHARS.charAt(index));
+        }
+        return salt.toString();
 
     }
 }

@@ -1,16 +1,33 @@
 package com.cr0mbly.whereshouldibuy.dataModels.authentication;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * Created by HoulihanA on 12/07/2017.
  */
+@Document
 public class User {
 
+    @Id
     private String userID;
+
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private String confirmPassword;
+    private Boolean loggedIn;
+
+    public User (){}
+
+    public User(String userID, String firstName, String lastName, String email, String password, Boolean loggedIn) {
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.loggedIn = loggedIn;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -52,12 +69,11 @@ public class User {
         this.userID = userID;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public Boolean getLoggedIn() {
+        return loggedIn;
     }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setLoggedIn(Boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
 }

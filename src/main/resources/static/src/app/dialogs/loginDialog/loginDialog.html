@@ -27,38 +27,38 @@
   <md-tab label="Sign Up">
     <br>
     <form (ngSubmit)="doSignup($event)">
-      <md-list [formGroup]="singupForm">
+      <md-list [formGroup]="singUpForm">
         <md-list-item>
           <md-input-container>
-            <input mdInput formControlName="firstName" placeholder="First Name">
+            <input mdInput formControlName="firstName" placeholder="First Name" type="text">
           </md-input-container>
         </md-list-item>
         <md-list-item>
           <md-input-container>
-            <input mdInput formControlName="lastName" placeholder="Last Name">
+            <input mdInput formControlName="lastName" placeholder="Last Name" type="text">
           </md-input-container>
         </md-list-item>
         <br>
         <md-list-item>
           <md-input-container class ="input-full-width">
-            <input mdInput formControlName="email" placeholder="Email Address">
+            <input mdInput formControlName="email" placeholder="Email Address" type="email">
           </md-input-container>
         </md-list-item>
         <md-list-item>
           <md-input-container class ="input-full-width">
-            <input mdInput formControlName="userID" placeholder="Username">
-          </md-input-container>
-        </md-list-item>
-        <br>
-        <md-list-item>
-          <md-input-container class ="input-full-width">
-            <input mdInput formControlName="password" placeholder="Password">
+            <input mdInput formControlName="userID" placeholder="Username" type="text">
           </md-input-container>
         </md-list-item>
         <br>
         <md-list-item>
           <md-input-container class ="input-full-width">
-            <input mdInput formControlName="confirmPassword" placeholder="Confirm Password">
+            <input mdInput formControlName="password" placeholder="Password"  type="password"  type="password">
+          </md-input-container>
+        </md-list-item>
+        <br>
+        <md-list-item>
+          <md-input-container class ="input-full-width">
+            <input mdInput formControlName="confirmPassword" placeholder="Confirm Password"  type="password">
           </md-input-container>
         </md-list-item>
         <md-list-item>
