@@ -92,8 +92,14 @@ public class CredentialsController {
     public UserProfile Profile(@PathVariable("userID") String userId){
         User currentUser = userLoginRepo.findByUserID(userId);
         String saltedPassword = saltyString(currentUser.getPassword().length());
-        return new UserProfile(currentUser.getUserID()
-                ,currentUser.getFirstName(),currentUser.getLastName(),currentUser.getEmail(),saltedPassword);
+
+        UserProfile profile = new UserProfile();
+        profile.setUserID(currentUser.getUserID());
+        profile.setEmail(currentUser.getEmail());
+        profile.setFirstName(currentUser.getFirstName());
+        profile.setLastName(currentUser.getLastName());
+        profile.setPassword(saltedPassword);
+        return profile;
 
     }
 

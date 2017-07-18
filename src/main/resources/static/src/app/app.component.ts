@@ -1,4 +1,4 @@
-import {Component, ViewChild,HostListener} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import 'rxjs'
 import 'rxjs/add/operator/map'
 import {SharedServices} from './sharedModules/sharedServices'

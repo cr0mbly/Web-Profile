@@ -43,11 +43,10 @@ export class RestQueryService {
   };
 
   updateProfile(updateForm){
-    let headers = new Headers([{ 'Content-Type': 'application/json' },
-                               { 'authorization': 'Bearer ' + this._cookies.get("jwt")}]);
+    let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
     let options = new RequestOptions({ headers: headers });
 
-    return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.profile , updateForm,options).map(res => res.json());
+    return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.profile +  this._cookies.get("userID"), updateForm,options).map(res => res.json());
   };
 
   profile() {

@@ -1,7 +1,11 @@
 <div class="app-content" fullscreen>
   <md-card>
+    <md-card-header>
+      cr0mbly
+    </md-card-header>
     <form (ngSubmit)="submitUpdate($event)">
       <md-list [formGroup]="updateForm">
+        <br>
         <md-list-item>
           <md-input-container>
             <input mdInput formControlName="firstName" [ngClass]="{ disabled : editFields == false }" placeholder="First Name" type="text" [readonly]="!editFields">
@@ -18,11 +22,6 @@
             <input mdInput formControlName="email" [ngClass]="{ disabled : editFields == false }" placeholder="Email Address" type="email" [readonly]="!editFields">
           </md-input-container>
         </md-list-item>
-        <md-list-item>
-          <md-input-container class ="input-full-width">
-            <input mdInput formControlName="userID" [ngClass]="{ disabled : editFields == false }" placeholder="Username" type="text" [readonly]="!editFields">
-          </md-input-container>
-        </md-list-item>
         <br>
         <md-list-item>
           <md-input-container class ="input-full-width">
@@ -35,6 +34,7 @@
             <input mdInput formControlName="confirmPassword" [ngClass]="{ disabled : editFields == false }" placeholder="Confirm Password" type="password" [readonly]="!editFields">
           </md-input-container>
         </md-list-item>
+        <br>
         <md-list-item>
           <button md-button (click)="submitUpdate()">
             <span *ngIf="!editFields">update profile</span>

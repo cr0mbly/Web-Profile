@@ -27,7 +27,7 @@ nbdist/
 ### Front end ##
 
 node_modules/
-.gradle
+.gradle/
 
 ### Back end ###
 

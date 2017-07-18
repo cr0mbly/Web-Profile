@@ -11,6 +11,7 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 export class profile implements OnInit{
 
   constructor(private _restQueryService:RestQueryService){}
+  private currentUser:string;
 
   private updateForm: FormGroup = new FormGroup({
     firstName : new FormControl('', Validators.minLength(2)),
@@ -25,10 +26,13 @@ export class profile implements OnInit{
 
   submitUpdate(){
     if(this.editFields){
+
       let profile = this.updateForm.value;
       delete profile.confirmPassword;
-      this._restQueryService.updateProfile(profile).subscribe(response => {
+      profile['userID'] = this.currentUser;
 
+      this._restQueryService.updateProfile(profile).subscribe(response => {
+          console.log(response);
       });
     }
     this.editFields = !this.editFields;
@@ -36,12 +40,14 @@ export class profile implements OnInit{
 
   ngOnInit(){
     this._restQueryService.profile().subscribe(response => {
+
+      this.currentUser = response.userID;
+
       this.updateForm.get('firstName').setValue(response.firstName);
       this.updateForm.get('lastName').setValue(response.lastName);
       this.updateForm.get('email').setValue(response.email);
-      this.updateForm.get('userID').setValue(response.userID);
-      this.updateForm.get('password').setValue(response.passwordLength);
-      this.updateForm.get('confirmPassword').setValue(response.passwordLength);
+      this.updateForm.get('password').setValue(response.password);
+      this.updateForm.get('confirmPassword').setValue(response.password);
 
 
     })
