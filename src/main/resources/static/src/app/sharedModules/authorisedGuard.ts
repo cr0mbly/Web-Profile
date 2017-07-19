@@ -13,6 +13,7 @@ export class AuthorisedGuard implements CanActivate {
       return true
     }
     if(this._cookies.get('jwt')){
+      this._sharedServices.loggedIn(true);
       return true;
     }else{
       return false;

@@ -6,10 +6,11 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class SharedServices {
 
   public mobileView = new BehaviorSubject<boolean>(false);
+  mobileViewObservable = this.mobileView.asObservable();
 
   public loggedInState = new BehaviorSubject<boolean>(false);
+  loggedInObservable = this.loggedInState.asObservable();
 
-  mobileViewObservable = this.mobileView.asObservable();
   // service command
   changeNav(state) {
     this.mobileView.next(state);

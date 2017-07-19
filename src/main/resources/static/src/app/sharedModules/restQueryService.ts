@@ -15,6 +15,7 @@ export class RestQueryService {
     "user" : "/user/",
     "signUp" : "signUp/",
     "login" : "login/",
+    "logout" : "logout/",
     "profile" : "profile/"
   };
 
@@ -35,12 +36,17 @@ export class RestQueryService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.login , loginForm,options)
-      .map(res => res.json()).subscribe(response => {
-        this._cookies.put("jwt",response.jwt);
-        this._cookies.put("userID",response.userID);
-        this._sharedServices.loggedIn(true);
-      });
+      .map(res => res.json());
   };
+
+  logout(){
+
+    let headers = new Headers([{ 'authorization': 'Bearer ' + this._cookies.get("jwt")},{ 'Content-Type': 'application/json' }]);
+    let options = new RequestOptions({ headers: headers });
+
+    return this._http.delete(this.backEndHost +  this.backendURLS.user + this.backendURLS.logout + this._cookies.get("userID"),options)
+      .map(res => res.json());
+  }
 
   updateProfile(updateForm){
     let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});

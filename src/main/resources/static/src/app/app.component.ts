@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import 'rxjs'
 import 'rxjs/add/operator/map'
 import {SharedServices} from './sharedModules/sharedServices'
@@ -11,11 +11,12 @@ import {SharedServices} from './sharedModules/sharedServices'
   templateUrl: 'app.component.html'
 })
 
-export class AppComponent {
+export class AppComponent{
 
-  constructor(private sharedServices:SharedServices){}
+  constructor(private _sharedServices:SharedServices){}
 
   private resizeTimeout;
+
 
   @HostListener('window:resize')
   onWindowResize(event) {
@@ -24,7 +25,7 @@ export class AppComponent {
      };
 
     this.resizeTimeout = setTimeout((() => {
-      this.sharedServices.changeNav(event.target.innerWidth < 500 ? true : false);
+      this._sharedServices.changeNav(event.target.innerWidth < 500 ? true : false);
     }).bind(this), 200);
   }
 }

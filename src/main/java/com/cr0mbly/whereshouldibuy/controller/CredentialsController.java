@@ -58,10 +58,15 @@ public class CredentialsController {
 
         returnObj.addProperty("jwt", jwt);
         returnObj.addProperty("userID", userID);
-
         return  returnObj.toString();
     }
 
+    @RequestMapping(value = "/logout/{userID}", method = RequestMethod.DELETE)
+    public void logOut(@PathVariable("userID") String userId){
+        User currentUser = userLoginRepo.findByUserID(userId);
+        currentUser.setLoggedIn(false);
+        userLoginRepo.save(currentUser);
+    }
     @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public String signUp(@RequestBody User user) {
         JsonObject returnObj = new JsonObject();

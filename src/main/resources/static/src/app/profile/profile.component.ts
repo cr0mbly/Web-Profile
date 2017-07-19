@@ -39,7 +39,6 @@ export class profile implements OnInit{
       profile['userID'] = this.currentUser;
 
       this._restQueryService.updateProfile(profile).subscribe(response => {
-          console.log(response);
           this.openSnackBar()
       });
     }
@@ -48,7 +47,6 @@ export class profile implements OnInit{
 
   ngOnInit(){
     this._restQueryService.profile().subscribe(response => {
-
       this.currentUser = response.userID;
 
       this.updateForm.get('firstName').setValue(response.firstName);

@@ -26,26 +26,33 @@ export class LoginDialog{
     password : new FormControl('',Validators.minLength(8)),
     confirmPassword : new FormControl('',Validators.minLength(8))
   });
-  constructor(public _dialogRef: MdDialogRef<LoginDialog>, private _restService:RestQueryService,
-              private _router:Router, private _sharedServices: SharedServices, private _cookieService: CookieService) {}
+  constructor(public _loginDialog: MdDialogRef<LoginDialog>, private _restService:RestQueryService,
+              private _router:Router, private _sharedServices: SharedServices, private _cookies: CookieService) {}
 
   doSignup(){
-    this.singUpForm.removeControl("confirmPassword");
-    this._restService.signUp(this.singUpForm.value).subscribe(response => {
-      console.log(response);
+
+    let signUpDetails = this.singUpForm.value;
+    delete signUpDetails.confirmPassword;
+
+    this._restService.signUp(signUpDetails).subscribe(response => {
+      this._loginDialog.close();
+      this._router.navigate([response.redirect]);
 
 
     })
 
   }
   doLogin(){
-    this._restService.login(this.loginForm.value);
+    console.log(this.loginForm.value)
+    this._restService.login(this.loginForm.value).subscribe(response => {
 
-    if(this._sharedServices.loggedInState){
-      this._router.navigate(['/profile/' + this._cookieService.get("userID")])
-    }else {
-      console.log("failed credentials");
-    }
+      this._cookies.put("jwt",response.jwt);
+      this._cookies.put("userID",response.userID);
+
+      this._loginDialog.close();
+      this._router.navigate(['/profile/' + this._cookies.get("userID")])
+
+    });
   }
 }
 
