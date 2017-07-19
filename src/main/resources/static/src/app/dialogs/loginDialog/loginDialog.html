@@ -1,4 +1,4 @@
-<md-tab-group  dynamicHeight>
+<md-tab-group  dynamicHeight (selectChange)="changeTab($event)">
   <md-tab label="Login">
     <br>
     <form (ngSubmit)="doLogin($event)">
@@ -15,6 +15,7 @@
           </md-input-container>
         </md-list-item>
         <br>
+        <md-error *ngIf="authResponse" >{{authResponse}}</md-error>
         <md-list-item>
           <button md-button>
             <span>forgot your password?</span>
@@ -60,6 +61,9 @@
           <md-input-container class ="input-full-width">
             <input mdInput formControlName="confirmPassword" placeholder="Confirm Password"  type="password">
           </md-input-container>
+        </md-list-item>
+        <md-list-item>
+          <md-error *ngIf="authResponse" >{{authResponse}}</md-error>
         </md-list-item>
         <md-list-item>
           <button md-button>

@@ -13,6 +13,8 @@ import {SharedServices} from '../../sharedModules/sharedServices'
 })
 export class LoginDialog{
 
+  private authResponse:string;
+
   private loginForm: FormGroup = new FormGroup({
     userID : new FormControl(),
     password : new FormControl()
@@ -26,6 +28,7 @@ export class LoginDialog{
     password : new FormControl('',Validators.minLength(8)),
     confirmPassword : new FormControl('',Validators.minLength(8))
   });
+
   constructor(public _loginDialog: MdDialogRef<LoginDialog>, private _restService:RestQueryService,
               private _router:Router, private _sharedServices: SharedServices, private _cookies: CookieService) {}
 
@@ -43,16 +46,23 @@ export class LoginDialog{
 
   }
   doLogin(){
-    console.log(this.loginForm.value)
+    console.log(this.loginForm.value);
     this._restService.login(this.loginForm.value).subscribe(response => {
+      if(response.validLogin){
+        this._cookies.put("jwt",response.jwt);
+        this._cookies.put("userID",response.userID);
 
-      this._cookies.put("jwt",response.jwt);
-      this._cookies.put("userID",response.userID);
-
-      this._loginDialog.close();
-      this._router.navigate(['/profile/' + this._cookies.get("userID")])
+        this._loginDialog.close();
+        this._router.navigate(['/profile/' + this._cookies.get("userID")])
+      }else {
+        this.authResponse = response.message;
+      }
 
     });
+  }
+
+  changeTab($event: any){
+    this.authResponse = null;
   }
 }
 

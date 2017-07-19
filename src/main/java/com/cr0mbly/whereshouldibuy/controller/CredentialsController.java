@@ -8,6 +8,8 @@ import com.google.gson.JsonObject;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -16,13 +18,13 @@ import java.util.Random;
 /**
  * Created by HoulihanA on 12/07/2017.
  */
-
 @RestController
 @RequestMapping("/user")
 public class CredentialsController {
 
     @Autowired
     private UserLoginRepo userLoginRepo;
+
 
     private static final String EMAILREGEX =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -42,14 +44,18 @@ public class CredentialsController {
         User user = userLoginRepo.findByUserID(userID);
 
         if(user == null){
-            return "user not found";
+            returnObj.addProperty("validLogin",false);
+            returnObj.addProperty("message","user not found");
+            return returnObj.toString();
         }
 
         String pwd = user.getPassword();
 
 
         if(!password.equals(pwd)){
-            return "password not valid";
+            returnObj.addProperty("validLogin",false);
+            returnObj.addProperty("message","password not valid");
+            return returnObj.toString();
 
         }
 
@@ -58,6 +64,7 @@ public class CredentialsController {
 
         returnObj.addProperty("jwt", jwt);
         returnObj.addProperty("userID", userID);
+        returnObj.addProperty("validLogin",true);
         return  returnObj.toString();
     }
 
@@ -72,22 +79,25 @@ public class CredentialsController {
         JsonObject returnObj = new JsonObject();
 
         if(!(userLoginRepo.findByEmail(user.getUserID()) == null)){
+            returnObj.addProperty("validSignup",false);
             returnObj.addProperty("message", "username already taken");
             return returnObj.toString();
         }
 
         if (!user.getEmail().matches(EMAILREGEX)){
+            returnObj.addProperty("validSignup",false);
             returnObj.addProperty("message", "not a valid email");
             return returnObj.toString();
         }
 
         if(!((userLoginRepo.findByEmail(user.getEmail()))  == null)){
+            returnObj.addProperty("validSignup",false);
             returnObj.addProperty("message", "email already in use try resetting password");
             return returnObj.toString();
         }
 
         userLoginRepo.save(user);
-
+        returnObj.addProperty("validSignup",true);
         returnObj.addProperty("redirect", "/profile/" + user.getUserID());
         return returnObj.toString();
 

@@ -36,11 +36,11 @@ export class navRouterLayout implements OnInit{
 
   doLogout(){
     this._restQueryService.logout().subscribe(response => {
-        this._cookies.remove("jwt",response.jwt);
-        this._cookies.remove("userID",response.userID);
+        this._cookies.remove("jwt");
+        this._cookies.remove("userID");
         this._sharedServices.loggedIn(false);
+        this._router.navigate(['']);
     });
-    this._router.navigate(['']);
   }
 
   ngOnInit(){
