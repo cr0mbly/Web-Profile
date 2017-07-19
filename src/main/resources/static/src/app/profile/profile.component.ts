@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {RestQueryService} from '../sharedModules/restQueryService'
 import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {MdSnackBar} from '@angular/material';
 
+
+// Profile class
 @Component({
   selector: '<profile></profile>',
   templateUrl: 'profile.component.html',
@@ -10,7 +13,7 @@ import {FormGroup, FormControl, Validators} from "@angular/forms";
 
 export class profile implements OnInit{
 
-  constructor(private _restQueryService:RestQueryService){}
+  constructor(private _restQueryService:RestQueryService, public snackBar: MdSnackBar){}
   private currentUser:string;
 
   private updateForm: FormGroup = new FormGroup({
@@ -24,6 +27,10 @@ export class profile implements OnInit{
 
   public editFields:Boolean = false;
 
+  private openSnackBar() {
+    this.snackBar.open("hello World")._dismissAfter(2000);
+  };
+
   submitUpdate(){
     if(this.editFields){
 
@@ -33,6 +40,7 @@ export class profile implements OnInit{
 
       this._restQueryService.updateProfile(profile).subscribe(response => {
           console.log(response);
+          this.openSnackBar()
       });
     }
     this.editFields = !this.editFields;

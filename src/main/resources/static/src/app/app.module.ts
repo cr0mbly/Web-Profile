@@ -6,7 +6,7 @@ import { NgModule} from '@angular/core';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import {MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
+import {MdSnackBarModule, MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
 
 // //local imports
 import { AppComponent } from './app.component';
@@ -47,6 +47,7 @@ const appRoutes: Routes = [
     HttpModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MdSnackBarModule,
     MdButtonModule,
     MdSidenavModule,
     MdMenuModule,

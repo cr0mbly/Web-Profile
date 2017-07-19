@@ -5,10 +5,21 @@
     </button>
     <span class="toolbar-spacer">Aidans Page</span>
     <span class="header-spacer"></span>
-    <button (click)="openDialog()" md-button>
-      <md-icon>create</md-icon>
-      <span *ngIf="!mobile">Sign up</span>
-    </button>
+      <button (click)="openDialog()" [mdMenuTriggerFor]="menu" md-button>
+        <md-icon>create</md-icon>
+        <span *ngIf="!mobile && !loggedIn">Sign up</span>
+        <span *ngIf="!mobile && loggedIn">{{userID}}</span>
+      </button>
+      <md-menu #menu="mdMenu">
+        <button md-menu-item>
+          <md-icon>dialpad</md-icon>
+          <span>Profile</span>
+        </button>
+        <button md-menu-item>
+          <md-icon>voicemail</md-icon>
+          <span>Logout</span>
+        </button>
+      </md-menu>
     <md-toolbar-row *ngIf="!mobile">
       <button md-button routerLink="/link-1" routerLinkActive="active" class="toolbar-spacer">Link 1</button>
       <button md-button class="toolbar-spacer">Link 2</button>
