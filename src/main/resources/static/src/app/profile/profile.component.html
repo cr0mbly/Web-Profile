@@ -1,7 +1,7 @@
-<div class="app-content" fullscreen>
+<div class="app-content margins" fullscreen>
   <md-card>
     <md-card-header>
-      cr0mbly
+      {{currentUser}}
     </md-card-header>
     <form (ngSubmit)="submitUpdate($event)">
       <md-list [formGroup]="updateForm">

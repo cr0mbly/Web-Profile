@@ -23,12 +23,6 @@
           <span>Logout</span>
         </button>
       </md-menu>
-    <md-toolbar-row *ngIf="!mobile">
-      <button md-button routerLink="/link-1" routerLinkActive="active" class="toolbar-spacer">Link 1</button>
-      <button md-button class="toolbar-spacer">Link 2</button>
-      <button md-button class="toolbar-spacer">Link 3</button>
-      <button md-button class="toolbar-spacer">Link 4</button>
-    </md-toolbar-row>
   </md-toolbar>
 
   <md-sidenav #sidenav mode="over" opened="false">
@@ -65,5 +59,8 @@
       </md-list-item>
     </md-list>
   </md-sidenav>
-  <shared-body-component></shared-body-component>
+  <div class="app-route-content">
+    <router-outlet></router-outlet>
+  </div>
+  <footer></footer>
 </md-sidenav-container>

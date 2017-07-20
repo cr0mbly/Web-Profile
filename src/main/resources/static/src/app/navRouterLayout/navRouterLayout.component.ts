@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit, ElementRef} from '@angular/core';
 import {CookieService} from 'angular2-cookie/core';
 import {Router} from '@angular/router';
 import {SharedServices} from "../sharedModules/sharedServices";
@@ -16,13 +16,16 @@ import {MdDialog} from "@angular/material";
 
 export class navRouterLayout implements OnInit{
 
+  private viewHeight: number;
   private mobile;
   private loggedIn: boolean;
   private userID:string;
   public profileLink:string;
 
   constructor(private _sharedServices:SharedServices, public dialog: MdDialog,
-              private _cookies:CookieService, private _restQueryService:RestQueryService, private _router:Router){
+              private _cookies:CookieService, private _restQueryService:RestQueryService, private _router:Router,
+              private _elementView: ElementRef){
+
     this._sharedServices.mobileViewObservable.subscribe(data => this.mobile = data);
 
   }

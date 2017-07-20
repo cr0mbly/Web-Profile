@@ -1,6 +1,6 @@
 //library imports
 import { BrowserModule} from '@angular/platform-browser';
-import { RouterModule, Routes, CanActivate} from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule} from '@angular/core';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
@@ -23,7 +23,8 @@ import {AuthorisedGuard} from "./sharedModules/authorisedGuard"
 
 // Route mapping
 const appRoutes: Routes = [
-  { path : '', component: SharedBody},
+  { path : '', component: Landing},
+  { path : 'world', component: SharedBody},
   { path: 'profile/:userID',
     component: profile,
     canActivate: [AuthorisedGuard]},
