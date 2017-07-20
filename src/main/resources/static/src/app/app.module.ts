@@ -15,6 +15,7 @@ import {navRouterLayout} from './navRouterLayout/navRouterLayout.component'
 import {Landing} from "./landing/landing.component";
 import {profile} from "./profile/profile.component";
 import {SharedBody} from "./sharedBodyView/sharedBody.component";
+import {Footer} from "./footer/footer.component";
 import {LoginDialog} from "./dialogs/loginDialog/loginDialog";
 import {SharedServices} from "./sharedModules/sharedServices";
 import {AuthorisedGuard} from "./sharedModules/authorisedGuard"
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
     navRouterLayout,
     Landing,
     SharedBody,
+    Footer,
     profile,
     LoginDialog
   ],
