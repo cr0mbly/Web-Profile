@@ -16,16 +16,18 @@ public class User {
     private String lastName;
     private String email;
     private String password;
+    private Roles role;
     private Boolean loggedIn;
 
-    public User (){}
+    public User(){}
 
-    public User(String userID, String firstName, String lastName, String email, String password, Boolean loggedIn) {
+    public User(String userID, String firstName, String lastName, String email, String password, Roles role, Boolean loggedIn) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.role = role;
         this.loggedIn = loggedIn;
     }
 
@@ -69,11 +71,21 @@ public class User {
         this.userID = userID;
     }
 
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
     public Boolean getLoggedIn() {
         return loggedIn;
     }
+
     public void setLoggedIn(Boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
+
 
 }

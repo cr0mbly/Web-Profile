@@ -30,7 +30,7 @@ export class LoginDialog{
   });
 
   constructor(public _loginDialog: MdDialogRef<LoginDialog>, private _restService:RestQueryService,
-              private _router:Router, private _sharedServices: SharedServices, private _cookies: CookieService) {}
+              private _router:Router, private _cookies: CookieService) {}
 
   doSignup(){
 
@@ -46,11 +46,12 @@ export class LoginDialog{
 
   }
   doLogin(){
-    console.log(this.loginForm.value);
     this._restService.login(this.loginForm.value).subscribe(response => {
       if(response.validLogin){
+        console.log(response);
         this._cookies.put("jwt",response.jwt);
         this._cookies.put("userID",response.userID);
+        this._cookies.put("roles", response.roles);
 
         this._loginDialog.close();
         this._router.navigate(['/profile/' + this._cookies.get("userID")])

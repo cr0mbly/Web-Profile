@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {CookieService} from 'angular2-cookie/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import {SharedServices} from './sharedServices'
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 @Injectable()
 export class RestQueryService {
 
@@ -16,7 +16,8 @@ export class RestQueryService {
     "signUp" : "signUp/",
     "login" : "login/",
     "logout" : "logout/",
-    "profile" : "profile/"
+    "profile" : "/profile/",
+    "adminProfiles" : "/admin/profiles/"
   };
 
   constructor(private _http:Http, private _cookies:CookieService, private _sharedServices:SharedServices) {
@@ -29,7 +30,7 @@ export class RestQueryService {
 
     return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.signUp , signUpForm,options)
       .map(res => res.json())
-      .catch(this.handleError);
+      .catch(RestQueryService.handleError);
   };
 
   login(loginForm) {
@@ -39,7 +40,7 @@ export class RestQueryService {
 
     return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.login , loginForm,options)
       .map(res => res.json())
-      .catch(this.handleError);
+      .catch(RestQueryService.handleError);
   };
 
   logout(){
@@ -48,7 +49,7 @@ export class RestQueryService {
     let options = new RequestOptions({ headers: headers });
 
     return this._http.delete(this.backEndHost +  this.backendURLS.user + this.backendURLS.logout + this._cookies.get("userID"),options)
-      .catch(this.handleError);
+      .catch(RestQueryService.handleError);
   }
 
   updateProfile(updateForm){
@@ -57,7 +58,7 @@ export class RestQueryService {
 
     return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.profile +  this._cookies.get("userID"), updateForm,options)
       .map(res => res.json())
-      .catch(this.handleError);
+      .catch(RestQueryService.handleError);
   };
 
   profile() {
@@ -65,14 +66,27 @@ export class RestQueryService {
     let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
     let options = new RequestOptions({ headers: headers });
 
-    return this._http.get(this.backEndHost + this.backendURLS.user +
+    return this._http.get(this.backEndHost +
       this.backendURLS.profile + this._cookies.get("userID"),options)
       .map(res => res.json())
-      .catch(this.handleError);
+      .catch(RestQueryService.handleError);
   };
+  
+  fetchProfiles() {
+    let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
+    let options = new RequestOptions({ headers: headers });
 
+    return this._http.get(this.backEndHost +
+      this.backendURLS.adminProfiles + this._cookies.get("userID"),options)
+      .map(res => res.json())
+      .catch(RestQueryService.handleError);
+  };
+    
+  
+
+  
   //  TODO make it more specific
-  private handleError(error: any) {
+  private static handleError(error: any) {
     let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     console.error(errMsg);

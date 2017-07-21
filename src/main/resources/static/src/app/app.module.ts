@@ -18,7 +18,9 @@ import {SharedBody} from "./sharedBodyView/sharedBody.component";
 import {Footer} from "./footer/footer.component";
 import {LoginDialog} from "./dialogs/loginDialog/loginDialog";
 import {SharedServices} from "./sharedModules/sharedServices";
-import {AuthorisedGuard} from "./sharedModules/authorisedGuard"
+import {AuthorisedGuard} from "./sharedModules/loginGuards/authorisedGuard"
+import {AdminGuard} from "./sharedModules/loginGuards/adminGuard"
+import {UserAdministration} from "./userAdministration/userAdmin.component"
 
 
 // Route mapping
@@ -28,6 +30,9 @@ const appRoutes: Routes = [
   { path: 'profile/:userID',
     component: profile,
     canActivate: [AuthorisedGuard]},
+  { path: 'admin/profiles',
+    component: UserAdministration,
+    canActivate : [AuthorisedGuard, AdminGuard]}
 ];
 
 
@@ -41,7 +46,8 @@ const appRoutes: Routes = [
     SharedBody,
     Footer,
     profile,
-    LoginDialog
+    LoginDialog,
+    UserAdministration
   ],
   imports: [
     BrowserModule,
@@ -63,7 +69,7 @@ const appRoutes: Routes = [
     MdDialogModule,
     MdTabsModule
   ],
-  providers: [RestQueryService, SharedServices, CookieService, AuthorisedGuard],
+  providers: [RestQueryService, SharedServices, CookieService, AuthorisedGuard, AdminGuard],
   entryComponents : [LoginDialog],
   bootstrap: [AppComponent]
 })
