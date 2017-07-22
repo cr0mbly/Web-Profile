@@ -12,14 +12,12 @@ target/
 ### IntelliJ IDEA ###
 .idea
 *.iws
-*.iml
 *.ipr
 
 ### NetBeans ###
 nbproject/private/
 build/
 nbbuild/
-dist/
 nbdist/
 .nb-gradle/
 
@@ -32,7 +30,4 @@ node_modules/
 ### Back end ###
 
 tmp/
-.gradle/3.5/fileContent/
-.gradle/3.5/taskHistory/jvmClassSignatures.bin
-src/main/java/com/cr0mbly/whereshouldibuy/controller/SecureController.java
-src/main/java/com/cr0mbly/whereshouldibuy/services/interfaces/
+
