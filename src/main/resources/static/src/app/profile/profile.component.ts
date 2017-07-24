@@ -28,7 +28,7 @@ export class profile implements OnInit{
   public editFields:Boolean = false;
 
   private openSnackBar() {
-    this.snackBar.open("hello World")._dismissAfter(2000);
+    this.snackBar.open("User Updated")._dismissAfter(2000);
   };
 
   submitUpdate(){

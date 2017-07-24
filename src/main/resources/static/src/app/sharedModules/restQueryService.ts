@@ -71,20 +71,20 @@ export class RestQueryService {
       .map(res => res.json())
       .catch(RestQueryService.handleError);
   };
-  
+
   fetchProfiles() {
     let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
     let options = new RequestOptions({ headers: headers });
 
     return this._http.get(this.backEndHost +
       this.backendURLS.adminProfiles + this._cookies.get("userID"),options)
-      .map(res => res.json())
-      .catch(RestQueryService.handleError);
+      .map(res => res.json());
+      // .catch(RestQueryService.handleError);
   };
-    
-  
 
-  
+
+
+
   //  TODO make it more specific
   private static handleError(error: any) {
     let errMsg = (error.message) ? error.message :

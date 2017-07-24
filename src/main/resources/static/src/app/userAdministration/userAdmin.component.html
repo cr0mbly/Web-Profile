@@ -1,31 +1,38 @@
 <div class="example-container mat-elevation-z8">
   <md-table #table [dataSource]="dataSource">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
     <!-- ID Column -->
     <ng-container cdkColumnDef="userId">
-      <md-header-cell *cdkHeaderCellDef> ID </md-header-cell>
-      <md-cell *cdkCellDef="let row"> {{row.id}} </md-cell>
+      <md-header-cell *cdkHeaderCellDef> UserID </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.userID}} </md-cell>
     </ng-container>
 
     <!-- Progress Column -->
-    <ng-container cdkColumnDef="progress">
-      <md-header-cell *cdkHeaderCellDef> Progress </md-header-cell>
-      <md-cell *cdkCellDef="let row"> {{row.progress}}% </md-cell>
+    <ng-container cdkColumnDef="firstName">
+      <md-header-cell *cdkHeaderCellDef> First Name </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.firstName}}% </md-cell>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container cdkColumnDef="userName">
-      <md-header-cell *cdkHeaderCellDef> Name </md-header-cell>
-      <md-cell *cdkCellDef="let row"> {{row.name}} </md-cell>
+    <ng-container cdkColumnDef="lastName">
+      <md-header-cell *cdkHeaderCellDef> Last Name </md-header-cell>
+      <md-cell *cdkCellDef="let row"> {{row.lastName}} </md-cell>
     </ng-container>
 
     <!-- Color Column -->
-    <ng-container cdkColumnDef="color">
-      <md-header-cell *cdkHeaderCellDef>Color</md-header-cell>
-      <md-cell *cdkCellDef="let row" [style.color]="row.color"> {{row.color}} </md-cell>
+    <ng-container cdkColumnDef="email">
+      <md-header-cell *cdkHeaderCellDef>Email</md-header-cell>
+      <md-cell *cdkCellDef="let row" [style.color]="row.color"> {{row.email}} </md-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container cdkColumnDef="edit">
+      <md-header-cell *cdkHeaderCellDef>Edit</md-header-cell>
+      <md-cell *cdkCellDef="let row" [style.color]="row.color">
+        <button md-button (click)="editUser(row)">
+        <md-icon>mode_edit</md-icon>
+        <span>Edit User</span>
+      </button> </md-cell>
     </ng-container>
 
     <md-header-row *cdkHeaderRowDef="displayedColumns"></md-header-row>

@@ -57,7 +57,7 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "/admin/profiles/{userID}", method = RequestMethod.GET)
-    public List<UserProfile> adminPorfiles(@PathVariable("userID") String userID) throws Exception {
+    public List<UserProfile> adminProfiles(@PathVariable("userID") String userID) throws Exception {
         User currentUser = userLoginRepo.findByUserID(userID);
 
         if(currentUser == null){
@@ -72,6 +72,32 @@ public class ProfileController {
 
     }
 
+//    @RequestMapping(value = "/admin/{adminUser}/edit/{userID}", method = RequestMethod.GET)
+//    public UserProfile adminProfiles(@PathVariable("adminUser") String adminUser,@PathVariable("userID") String userID) throws Exception {
+//        User admin = userLoginRepo.findByUserID(adminUser);
+//        User currentUser = userLoginRepo.findByUserID(userID);
+//
+//        if(currentUser == null || admin == null){
+//            throw new Exception("invalid user");
+//        }
+//
+//        if(admin.getRole() != Roles.ADMIN){
+//            throw new Exception("user is not an administrator");
+//        }
+//
+//        String saltedPassword = saltyString(currentUser.getPassword().length());
+//
+//        UserProfile profile = new UserProfile();
+//        profile.setUserID(currentUser.getUserID());
+//        profile.setEmail(currentUser.getEmail());
+//        profile.setFirstName(currentUser.getFirstName());
+//        profile.setLastName(currentUser.getLastName());
+//        profile.setRole(currentUser.getRole());
+//        profile.setPassword(saltedPassword);
+//
+//        return profile;
+//
+//    }
 
     // TODO move somewhere where multiple classes can use
     private String saltyString(int length) {
