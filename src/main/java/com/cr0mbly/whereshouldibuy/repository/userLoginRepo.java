@@ -6,9 +6,9 @@ import com.cr0mbly.whereshouldibuy.services.interfaces.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.concurrent.Callable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Created by HoulihanA on 18/07/2017.

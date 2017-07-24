@@ -47,6 +47,11 @@ dependencies {
     testCompile('com.google.code.gson:gson:1.7.2')
 }
 
+task myRun(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main = "com.cr0mbly.whereshouldibuy.WhereshouldibuyApplication"
+}
+
 task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
 }
