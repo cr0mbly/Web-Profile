@@ -34,7 +34,7 @@ const appRoutes: Routes = [
   { path: 'admin/profiles',
     component: UserAdministration,
     canActivate : [AuthorisedGuard, AdminGuard]},
-  { path: '/admin/:adminID/editProfile/:userID',
+  { path: 'admin/:adminID/editProfile/:userID',
     component : profile,
     canActivate: [AuthorisedGuard, AdminGuard]
   }

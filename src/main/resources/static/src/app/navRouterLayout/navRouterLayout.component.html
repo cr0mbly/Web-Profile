@@ -3,7 +3,7 @@
     <button *ngIf="mobile" (click)="sidenav.toggle()" md-icon-button >
       <md-icon>view_list</md-icon>
     </button>
-    <span class="toolbar-spacer">Aidans Page</span>
+    <span class="toolbar-spacer">World Star</span>
     <span class="header-spacer"></span>
       <button *ngIf="!loggedIn" (click)="openDialog()" md-button>
         <md-icon>lock_open</md-icon>
@@ -23,6 +23,13 @@
           <span>Logout</span>
         </button>
       </md-menu>
+
+      <md-toolbar-row>
+        <a md-button *ngFor="let item of toolbarLinks" (click)="toolbarNav(item.path)" md-button>
+          <md-icon>lock_open</md-icon>
+          <span *ngIf="!mobile">{{item.linkName}}</span>
+        </a>
+      </md-toolbar-row>
   </md-toolbar>
 
   <md-sidenav #sidenav mode="over" opened="false">

@@ -1,0 +1,30 @@
+{
+  "ADMIN": [
+    {
+      "linkName": "Manage Users",
+      "path": "admin/profiles"
+    },
+    {
+      "linkName": "test",
+      "path": "blah/blah"
+    },
+    {
+      "linkName": "test",
+      "path": "blah/blah"
+    }
+  ],
+  "USER": [
+    {
+      "linkName": "test",
+      "path": "blah/blah"
+    },
+    {
+      "linkName": "test",
+      "path": "blah/blah"
+    },
+    {
+      "linkName": "test",
+      "path": "blah/blah"
+    }
+  ]
+}

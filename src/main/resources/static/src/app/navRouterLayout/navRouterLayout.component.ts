@@ -15,16 +15,20 @@ import {MdDialog} from "@angular/material";
 })
 
 export class navRouterLayout implements OnInit{
-  
+
   private mobile;
   private loggedIn: boolean;
   private userID:string;
   public profileLink:string;
-
+  private toolbarLinks;
   constructor(private _sharedServices:SharedServices, public dialog: MdDialog,
               private _cookies:CookieService, private _restQueryService:RestQueryService, private _router:Router){
 
     this._sharedServices.mobileViewObservable.subscribe(data => this.mobile = data);
+    this._restQueryService.loadJsonResource("assets/resource.json").subscribe(resource => {
+      this.toolbarLinks = resource[this._cookies.get("role")];
+
+    });
 
   }
 
@@ -42,6 +46,10 @@ export class navRouterLayout implements OnInit{
         this._sharedServices.loggedIn(false);
         this._router.navigate(['']);
     });
+  }
+
+  toolbarNav(route){
+    this._router.navigate(['admin/profiles']);
   }
 
   ngOnInit(){

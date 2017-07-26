@@ -51,7 +51,7 @@ export class LoginDialog{
         console.log(response);
         this._cookies.put("jwt",response.jwt);
         this._cookies.put("userID",response.userID);
-        this._cookies.put("roles", response.roles);
+        this._cookies.put("role", response.role);
 
         this._loginDialog.close();
         this._router.navigate(['/profile/' + this._cookies.get("userID")])

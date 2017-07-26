@@ -23,7 +23,13 @@ export class RestQueryService {
   constructor(private _http:Http, private _cookies:CookieService, private _sharedServices:SharedServices) {
   };
 
-  signUp(signUpForm) {
+  loadJsonResource(resourcesToLoad) : Observable<any> {
+    return this._http.get(resourcesToLoad)
+      .map(res => res.json())
+      .catch(RestQueryService.handleError);
+  }
+
+  signUp(signUpForm) : Observable<any> {
 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -33,7 +39,7 @@ export class RestQueryService {
       .catch(RestQueryService.handleError);
   };
 
-  login(loginForm) {
+  login(loginForm) : Observable<any> {
 
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -52,7 +58,7 @@ export class RestQueryService {
       .catch(RestQueryService.handleError);
   }
 
-  updateProfile(updateForm){
+  updateProfile(updateForm) : Observable<any> {
     let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
     let options = new RequestOptions({ headers: headers });
 
@@ -61,7 +67,7 @@ export class RestQueryService {
       .catch(RestQueryService.handleError);
   };
 
-  profile() {
+  profile() : Observable<any> {
 
     let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
     let options = new RequestOptions({ headers: headers });
@@ -72,7 +78,7 @@ export class RestQueryService {
       .catch(RestQueryService.handleError);
   };
 
-  fetchProfiles() {
+  fetchProfiles() : Observable<any> {
     let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
     let options = new RequestOptions({ headers: headers });
 

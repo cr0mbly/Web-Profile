@@ -70,7 +70,7 @@ public class CredentialsController {
         returnObj.addProperty("jwt", jwt);
         returnObj.addProperty("userID", userID);
         returnObj.addProperty("validLogin",true);
-        returnObj.addProperty("roles", user.getRole().toString());
+        returnObj.addProperty("role", user.getRole().toString());
         return  returnObj.toString();
     }
 
