@@ -30,7 +30,6 @@ public class ProfileController {
             throw new Exception("user not logged in");
         }
 
-        String saltedPassword = saltyString(currentUser.getPassword().length());
 
         UserProfile profile = new UserProfile();
         profile.setUserID(currentUser.getUserID());
@@ -38,7 +37,7 @@ public class ProfileController {
         profile.setFirstName(currentUser.getFirstName());
         profile.setLastName(currentUser.getLastName());
         profile.setRole(currentUser.getRole());
-        profile.setPassword(saltedPassword);
+        profile.setPassword("notThePassword");
         return profile;
 
     }
@@ -72,17 +71,4 @@ public class ProfileController {
 
     }
 
-
-    // TODO move somewhere where multiple classes can use
-    private String saltyString(int length) {
-        String SALTCHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-        StringBuilder salt = new StringBuilder();
-        Random rnd = new Random();
-        while (salt.length() < length) { // length of the random string.
-            int index = (int) (rnd.nextFloat() * SALTCHARS.length());
-            salt.append(SALTCHARS.charAt(index));
-        }
-        return salt.toString();
-
-    }
 }

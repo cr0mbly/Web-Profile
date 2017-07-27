@@ -10,6 +10,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -21,6 +22,9 @@ import java.util.Random;
 @RestController
 @RequestMapping("/user")
 public class CredentialsController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserLoginRepo userLoginRepo;
@@ -51,10 +55,7 @@ public class CredentialsController {
             return returnObj.toString();
         }
 
-        String pwd = user.getPassword();
-
-
-        if(!password.equals(pwd)){
+        if(!passwordEncoder.matches(login.getPassword(),user.getPassword())){
             returnObj.addProperty("validLogin",false);
             returnObj.addProperty("message","password not valid");
             return returnObj.toString();
@@ -101,8 +102,11 @@ public class CredentialsController {
             returnObj.addProperty("message", "email already in use try resetting password");
             return returnObj.toString();
         }
+
+        // set default user states and salt password
         user.setLoggedIn(false);
         user.setRole(Roles.USER);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userLoginRepo.save(user);
 
         returnObj.addProperty("validSignup",true);
