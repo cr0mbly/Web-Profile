@@ -49,7 +49,7 @@ public class ProfileController {
         User currentUser = userLoginRepo.findByUserID(profile.getUserID());
 
         User updatedUser = new User(profile.getUserID(),profile.getFirstName(),profile.getLastName(),profile.getEmail(),
-                currentUser.getPassword(), Roles.USER, currentUser.getLoggedIn());
+                currentUser.getPassword(), currentUser.getRole(), currentUser.getLoggedIn());
 
         userLoginRepo.save(updatedUser);
         returnObj.addProperty("result", "updated User!");
@@ -72,32 +72,6 @@ public class ProfileController {
 
     }
 
-//    @RequestMapping(value = "/admin/{adminUser}/edit/{userID}", method = RequestMethod.GET)
-//    public UserProfile adminProfiles(@PathVariable("adminUser") String adminUser,@PathVariable("userID") String userID) throws Exception {
-//        User admin = userLoginRepo.findByUserID(adminUser);
-//        User currentUser = userLoginRepo.findByUserID(userID);
-//
-//        if(currentUser == null || admin == null){
-//            throw new Exception("invalid user");
-//        }
-//
-//        if(admin.getRole() != Roles.ADMIN){
-//            throw new Exception("user is not an administrator");
-//        }
-//
-//        String saltedPassword = saltyString(currentUser.getPassword().length());
-//
-//        UserProfile profile = new UserProfile();
-//        profile.setUserID(currentUser.getUserID());
-//        profile.setEmail(currentUser.getEmail());
-//        profile.setFirstName(currentUser.getFirstName());
-//        profile.setLastName(currentUser.getLastName());
-//        profile.setRole(currentUser.getRole());
-//        profile.setPassword(saltedPassword);
-//
-//        return profile;
-//
-//    }
 
     // TODO move somewhere where multiple classes can use
     private String saltyString(int length) {

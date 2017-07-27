@@ -9,7 +9,7 @@ export class AdminGuard implements CanActivate {
   constructor(private _cookies:CookieService) {}
 
   canActivate() {
-    return this._cookies.get("roles") === "ADMIN";
+    return this._cookies.get("role") === "ADMIN";
   }
 }
 

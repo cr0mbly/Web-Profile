@@ -24,8 +24,8 @@
         </button>
       </md-menu>
 
-      <md-toolbar-row>
-        <a md-button *ngFor="let item of toolbarLinks" (click)="toolbarNav(item.path)" md-button>
+      <md-toolbar-row *ngIf="loggedIn">
+        <a md-button *ngFor="let item of toolbarLinks" [routerLink]="item.path" md-button>
           <md-icon>lock_open</md-icon>
           <span *ngIf="!mobile">{{item.linkName}}</span>
         </a>

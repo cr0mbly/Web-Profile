@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RestQueryService} from '../sharedModules/restQueryService'
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {MdSnackBar} from '@angular/material';
+import {ActivatedRoute} from "@angular/router";
 
 
 // Profile class
@@ -13,8 +14,9 @@ import {MdSnackBar} from '@angular/material';
 
 export class profile implements OnInit{
 
-  constructor(private _restQueryService:RestQueryService, public snackBar: MdSnackBar){}
+  constructor(private _restQueryService:RestQueryService, private _route:ActivatedRoute , public snackBar: MdSnackBar){}
   private currentUser:string;
+  private adminEdit:boolean = false;
 
   private updateForm: FormGroup = new FormGroup({
     firstName : new FormControl('', Validators.minLength(2)),
@@ -32,7 +34,7 @@ export class profile implements OnInit{
   };
 
   submitUpdate(){
-    if(this.editFields){
+    if(this.editFields && this.updateForm.dirty){
 
       let profile = this.updateForm.value;
       delete profile.confirmPassword;
@@ -46,6 +48,13 @@ export class profile implements OnInit{
   }
 
   ngOnInit(){
+    this._route.params.subscribe(params =>{
+      if(params.adminID){
+        this.adminEdit = true;
+
+      }
+    });
+
     this._restQueryService.profile().subscribe(response => {
       this.currentUser = response.userID;
 

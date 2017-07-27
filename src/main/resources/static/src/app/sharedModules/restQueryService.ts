@@ -62,7 +62,7 @@ export class RestQueryService {
     let headers = new Headers({ 'authorization': 'Bearer ' + this._cookies.get("jwt")});
     let options = new RequestOptions({ headers: headers });
 
-    return this._http.post(this.backEndHost + this.backendURLS.user + this.backendURLS.profile +  this._cookies.get("userID"), updateForm,options)
+    return this._http.post(this.backEndHost + this.backendURLS.profile +  this._cookies.get("userID"), updateForm,options)
       .map(res => res.json())
       .catch(RestQueryService.handleError);
   };

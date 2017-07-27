@@ -4,7 +4,6 @@ import {CookieService} from 'angular2-cookie/core';
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import { Router } from '@angular/router'
 import {RestQueryService} from '../../sharedModules/restQueryService'
-import {SharedServices} from '../../sharedModules/sharedServices'
 
 @Component({
   selector: 'login-dialog',
@@ -48,12 +47,14 @@ export class LoginDialog{
   doLogin(){
     this._restService.login(this.loginForm.value).subscribe(response => {
       if(response.validLogin){
-        console.log(response);
+
+        // set user cookies
         this._cookies.put("jwt",response.jwt);
         this._cookies.put("userID",response.userID);
         this._cookies.put("role", response.role);
-
         this._loginDialog.close();
+
+
         this._router.navigate(['/profile/' + this._cookies.get("userID")])
       }else {
         this.authResponse = response.message;

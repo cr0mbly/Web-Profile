@@ -2,7 +2,7 @@
   "ADMIN": [
     {
       "linkName": "Manage Users",
-      "path": "admin/profiles"
+      "path": "/admin/profiles"
     },
     {
       "linkName": "test",

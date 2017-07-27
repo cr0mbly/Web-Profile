@@ -31,7 +31,9 @@ export class UserAdministration implements OnInit{
 
   editUser(row){
     let adminUser = this._cookies.get('userID');
-    this._router.navigate(['/admin/', adminUser,'/editProfile/',row.userID]);
+    console.log(adminUser);
+    console.log(row.userID);
+    this._router.navigate(['admin', adminUser,'editProfile',row.userID]);
   }
 
 }

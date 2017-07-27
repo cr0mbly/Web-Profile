@@ -37,11 +37,15 @@ dependencies {
     compile ('org.springframework.security:spring-security-web:4.2.0.RELEASE')
     compile ('org.springframework.security:spring-security-web:4.2.0.RELEASE')
 
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+
     compile('org.springframework:spring-webmvc:4.2.0.RELEASE')
     testCompile('org.springframework:spring-webmvc:4.2.0.RELEASE')
 
     compile(group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2')
     testCompile(group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2')
+
 
     compile('com.google.code.gson:gson:1.7.2')
     testCompile('com.google.code.gson:gson:1.7.2')
