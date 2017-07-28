@@ -5,4 +5,25 @@
   margin: 2% 10% 2% 10%;
 }
 
+.grid-height{
+  height:100%;
+}
+
+.input-half-width {
+  display: flex;
+  flex: 1 100%;
+}
+.horizontal-spacer{
+  width: 2%;
+}
+.input-spacing {
+  width : 100%;
+}
+.submit-button{
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  /*padding: 10px;*/
+  margin: 10px 10px 0 0;
+}
 

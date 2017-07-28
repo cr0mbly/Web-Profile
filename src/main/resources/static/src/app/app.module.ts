@@ -7,8 +7,7 @@ import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {CdkTableModule} from '@angular/cdk';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import {MdTableModule, MdSnackBarModule, MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
-
+import {MdGridListModule, MdTableModule, MdSnackBarModule, MdTabsModule, MdDialogModule, MdCardModule, MdInputModule, MdMenuModule, MdIconModule, MdRippleModule, MdToolbarModule, MdSidenavModule, MdButtonModule} from '@angular/material';
 // //local imports
 import { AppComponent } from './app.component';
 import {RestQueryService} from './sharedModules/restQueryService'
@@ -19,15 +18,19 @@ import {SharedBody} from "./sharedBodyView/sharedBody.component";
 import {Footer} from "./footer/footer.component";
 import {LoginDialog} from "./dialogs/loginDialog/loginDialog";
 import {SharedServices} from "./sharedModules/sharedServices";
+import {CryptonatorApiService} from "./sharedModules/CryptonatorApiService";
 import {AuthorisedGuard} from "./sharedModules/loginGuards/authorisedGuard"
 import {AdminGuard} from "./sharedModules/loginGuards/adminGuard"
 import {UserAdministration} from "./userAdministration/userAdmin.component"
 
 
+
 // Route mapping
 const appRoutes: Routes = [
-  { path : '', component: Landing},
-  { path : 'world', component: SharedBody},
+  { path : '',
+    component: Landing},
+  { path : 'home',
+    component: SharedBody},
   { path: 'profile/:userID',
     component: profile,
     canActivate: [AuthorisedGuard]},
@@ -74,9 +77,10 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MdDialogModule,
     MdTabsModule,
+    MdGridListModule,
     CdkTableModule
   ],
-  providers: [RestQueryService, SharedServices, CookieService, AuthorisedGuard, AdminGuard],
+  providers: [RestQueryService, SharedServices, CryptonatorApiService, CookieService, AuthorisedGuard, AdminGuard],
   entryComponents : [LoginDialog],
   bootstrap: [AppComponent]
 })

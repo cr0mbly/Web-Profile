@@ -55,7 +55,7 @@ export class LoginDialog{
         this._loginDialog.close();
 
 
-        this._router.navigate(['/profile/' + this._cookies.get("userID")])
+        this._router.navigate(['home'])
       }else {
         this.authResponse = response.message;
       }

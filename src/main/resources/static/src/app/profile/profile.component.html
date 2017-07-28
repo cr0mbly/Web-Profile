@@ -5,46 +5,59 @@
     <md-card-header>
       {{currentUser}}
     </md-card-header>
-    <form (ngSubmit)="submitUpdate($event)">
-      <md-list [formGroup]="updateForm">
-        <br>
-        <md-list-item>
-          <md-input-container>
-            <input mdInput formControlName="firstName" [ngClass]="{ disabled : editFields == false }" placeholder="First Name" type="text" [readonly]="!editFields">
-          </md-input-container>
-        </md-list-item>
-        <md-list-item>
-          <md-input-container>
-            <input mdInput formControlName="lastName" [ngClass]="{ disabled : editFields == false }" placeholder="Last Name" type="text" [readonly]="!editFields">
-          </md-input-container>
-        </md-list-item>
-        <br>
-        <md-list-item>
-          <md-input-container class ="input-full-width">
-            <input mdInput formControlName="email" [ngClass]="{ disabled : editFields == false }" placeholder="Email Address" type="email" [readonly]="!editFields">
-          </md-input-container>
-        </md-list-item>
-        <br>
-        <md-list-item>
-          <md-input-container class ="input-full-width">
-            <input mdInput formControlName="password" [ngClass]="{ disabled : editFields == false }" placeholder="Password" type="password" [readonly]="!editFields">
-          </md-input-container>
-        </md-list-item>
-        <br>
-        <md-list-item>
-          <md-input-container class ="input-full-width">
-            <input mdInput formControlName="confirmPassword" [ngClass]="{ disabled : editFields == false }" placeholder="Confirm Password" type="password" [readonly]="!editFields">
-          </md-input-container>
-        </md-list-item>
-        <br>
-        <md-list-item>
-          <button md-button (click)="submitUpdate()">
-            <span *ngIf="!editFields">update profile</span>
-            <span *ngIf="editFields">submit update</span>
-          </button>
-          </md-list-item>
-        </md-list>
-      </form>
+      <md-grid-list cols="2" >
+        <md-grid-tile  layout-wrap gutterSize="1px">
+          <form (ngSubmit)="submitUpdate($event)">
+            <md-list [formGroup]="updateForm">
+              <br>
+              <md-list-item class="input-half-width">
+                <md-input-container class="input-spacing">
+                  <input mdInput formControlName="firstName" [ngClass]="{ disabled : editFields == false }"
+                         placeholder="First Name" type="text" [readonly]="!editFields">
+                </md-input-container>
+                <div class="horizontal-spacer"></div>
+                <md-input-container class="input-spacing">
+                  <input mdInput formControlName="lastName" [ngClass]="{ disabled : editFields == false }"
+                         placeholder="Last Name" type="text" [readonly]="!editFields">
+                </md-input-container>
+              </md-list-item>
+              <br>
+              <md-list-item>
+                <md-input-container class="input-spacing">
+                  <input mdInput formControlName="email" [ngClass]="{ disabled : editFields == false }"
+                         placeholder="Email Address" type="email" [readonly]="!editFields">
+                </md-input-container>
+              </md-list-item>
+              <br>
+              <md-list-item>
+                <md-input-container class="input-spacing">
+                  <input mdInput formControlName="password" [ngClass]="{ disabled : editFields == false }"
+                         placeholder="Password" type="password" [readonly]="!editFields">
+                </md-input-container>
+              </md-list-item>
+              <br>
+              <md-list-item>
+                <md-input-container class="input-spacing">
+                  <input mdInput formControlName="confirmPassword" [ngClass]="{ disabled : editFields == false }"
+                         placeholder="Confirm Password" type="password" [readonly]="!editFields">
+                </md-input-container>
+              </md-list-item>
+              <br>
+              <md-list-item>
+                <div class="submit-button">
+                  <button md-button (click)="submitUpdate()">
+                    <span *ngIf="!editFields">update profile</span>
+                    <span *ngIf="editFields">submit update</span>
+                  </button>
+                </div>
+              </md-list-item>
+            </md-list>
+          </form>
+        </md-grid-tile>
+        <md-grid-tile layout-wrap>
+          hello
+        </md-grid-tile>
+      </md-grid-list>
 
   </md-card>
 
