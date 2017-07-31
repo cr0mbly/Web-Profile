@@ -6,8 +6,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CryptonatorApiService {
 
-  CryptoPaths = {
-    "root" : "https://www.cryptocompare.com/api/",
+  public CryptoPaths = {
+    "root" : "https://www.cryptocompare.com",
+    "api"  : "/api/",
     "data" : "data/",
     "coinList" : "coinlist/"
   };
@@ -17,7 +18,7 @@ export class CryptonatorApiService {
 
   getCoinTypes() : Observable<any> {
 
-    return this._http.get(this.CryptoPaths.root + this.CryptoPaths.data + this.CryptoPaths.coinList)
+    return this._http.get(this.CryptoPaths.root + this.CryptoPaths.api + this.CryptoPaths.data + this.CryptoPaths.coinList)
       .map(res => res.json())
       .catch(CryptonatorApiService.handleError);
   };

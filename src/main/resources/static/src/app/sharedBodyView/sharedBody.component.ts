@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {Resolve} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
 import {CryptonatorApiService} from "../sharedModules/CryptonatorApiService";
+import {RestQueryService} from "../sharedModules/restQueryService";
 
 @Component({
   selector: 'shared-body-component',
@@ -8,27 +8,46 @@ import {CryptonatorApiService} from "../sharedModules/CryptonatorApiService";
   styleUrls: ['./sharedBody.component.css']
 })
 
-export class SharedBody implements Resolve{
+export class SharedBody implements OnInit{
+  private gridColumns = 10;
+  private coinTypes : coinType[];
 
-  private coinTypes = [];
-  private tiles = [
-    {text: 'One', cols: 3, rows: 1, color: 'lightblue'},
-    {text: 'Two', cols: 1, rows: 2, color: 'lightgreen'},
-    {text: 'Three', cols: 1, rows: 1, color: 'lightpink'}
-  ];
-
-  constructor(private _CryptoApi:CryptonatorApiService){}
-  resolve(){
-    this._CryptoApi.getCoinTypes().subscribe(types => {
-      for(let dataType in types.Data){
-        this.coinTypes.push(types.Data[dataType]);
-      }
-      console.log(this.coinTypes);
-    })
-  };
+  constructor(private _CryptoApi: CryptonatorApiService){}
 
   ngOnInit(){
+    this._CryptoApi.getCoinTypes().subscribe(types => {
+      let result = [];
+      for(let dataType in types.Data){
+        types.Data[dataType].ImageUrl = this._CryptoApi.CryptoPaths.root + types.Data[dataType].ImageUrl;
+        result.push(types.Data[dataType]);
+      }
+      this.coinTypes = result;
+
+      let width = window.screen.width;
+      this.gridColumns = Math.floor(width / 100)
+    });
   }
 
+  onResize(event) {
+    let elementWidth = event.target.innerWidth;
+    this.gridColumns = Math.floor(elementWidth / 100);
+  }
+  
 
+}
+
+interface coinType {
+  Algorithm : string
+  CoinName : string
+  FullName : string
+  FullyPremined : number
+  Id : string
+  ImageUrl : string
+  Name : string
+  PreMinedValue : string
+  ProofType : string
+  SortOrder : string
+  TotalCoinSupply : string
+  TotalCoinsFreeFloat : string
+  Url : string
 }
