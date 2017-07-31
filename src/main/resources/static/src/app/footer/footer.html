@@ -1,4 +1,4 @@
-<div [ngClass]="{'stickyFooter' : !footerOverflow, 'footerDesign' : true}">
+<div  (window:resize)="heightResize($event)" [ngClass]="{'stickyFooter' : footerOverflow, 'footerDesign' : true}">
   <div class="footerContent"> Built by Aidan Houlihan 2017</div>
 </div>
 

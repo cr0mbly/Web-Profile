@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -10,7 +10,8 @@ export class CryptonatorApiService {
     "root" : "https://www.cryptocompare.com",
     "api"  : "/api/",
     "data" : "data/",
-    "coinList" : "coinlist/"
+    "coinList" : "coinlist/",
+    "coinSnapshot" : "coinsnapshot"
   };
 
   constructor(private _http:Http) {
@@ -19,6 +20,21 @@ export class CryptonatorApiService {
   getCoinTypes() : Observable<any> {
 
     return this._http.get(this.CryptoPaths.root + this.CryptoPaths.api + this.CryptoPaths.data + this.CryptoPaths.coinList)
+      .map(res => res.json())
+      .catch(CryptonatorApiService.handleError);
+  };
+
+  getCoinSnapshot(coinID,currencyType) : Observable<any> {
+
+    let URLparams : URLSearchParams = new URLSearchParams();
+    URLparams.set("fsym" , coinID);
+    URLparams.set("tsym" , currencyType);
+
+    let options = new RequestOptions({ search: URLparams});
+
+    return this._http.get(
+      this.CryptoPaths.root + this.CryptoPaths.api + this.CryptoPaths.data
+            + this.CryptoPaths.coinSnapshot + "?fsym=" + coinID + "&tsym=" + currencyType)
       .map(res => res.json())
       .catch(CryptonatorApiService.handleError);
   };

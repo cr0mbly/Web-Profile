@@ -10,10 +10,11 @@ export class Footer implements OnInit{
 
   public footerOverflow:boolean;
 
-
+  heightResize(event){
+    this.footerOverflow = window.innerHeight > window.screen.height;
+  }
 
   ngOnInit(){
-    this.footerOverflow = window.innerHeight > window.screen.height;
-
+    this.footerOverflow = window.innerHeight < window.screen.height;
   }
 }

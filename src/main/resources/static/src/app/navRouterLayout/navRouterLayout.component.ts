@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnInit, ElementRef} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {CookieService} from 'angular2-cookie/core';
 import {Router} from '@angular/router';
 import {SharedServices} from "../sharedModules/sharedServices";
