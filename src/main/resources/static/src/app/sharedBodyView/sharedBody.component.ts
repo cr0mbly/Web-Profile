@@ -22,7 +22,6 @@ export class SharedBody implements OnInit{
         types.Data[dataType].ImageUrl = this._CryptoApi.CryptoPaths.root + types.Data[dataType].ImageUrl;
         result.push(types.Data[dataType]);
       }
-      console.log(types.Data);
       this.coinTypes = result;
 
       let width = window.screen.width;
@@ -35,9 +34,9 @@ export class SharedBody implements OnInit{
     this.gridColumns = Math.floor(elementWidth / 100);
   }
 
-  getCoinDetail(coinID) {
-    console.log(coinID);
-    this._CryptoApi.getCoinSnapshot(coinID, "NZD").subscribe(response => {
+  getCoinDetail(coinCode) {
+    this.detailedCoin = null;
+    this._CryptoApi.getCoinSnapshot(coinCode,"USD").subscribe(response => {
       this.detailedCoin = response.Data;
       console.log(this.detailedCoin);
     })

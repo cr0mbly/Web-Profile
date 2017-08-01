@@ -1,17 +1,18 @@
 <div *ngIf="coinTypes" class="app-content" (window:resize)="onResize($event)">
-  <md-grid-list gutterSize="20px" cols="{{gridColumns}}" rowHeight="1:1">
+  <md-grid-list class="gridSpacer" gutterSize="20px" cols="{{gridColumns}}" rowHeight="1:1">
     <md-grid-tile *ngFor="let item of coinTypes">
       <md-grid-tile-header>
         {{item.CoinName}}
       </md-grid-tile-header>
       <img [mdMenuTriggerFor]="menu" (click)="getCoinDetail(item.Name)" width="100" height="100" [src]="item.ImageUrl"
            onError="this.src='assets/images/cryptocoin_alt_image.png';"/>
-      <md-menu #menu="mdMenu" overlapTrigger="true">
-        <div layout="row" flex>
-          <div flex>COIN : {{item.Name}}</div>
-          <div flex>should repeat</div>
-          <div flex>for every</div>
-          <div flex>item</div>
+      <md-menu  #menu="mdMenu" overlapTrigger="true">
+        <div *ngIf="detailedCoin" layout="row" flex>
+          <div flex>COIN : <span>{{item.FullName}}</span></div>
+          <span flex>Markets : </span>
+          <div flex *ngFor="let exchange of detailedCoin.Exchanges">{{exchange.MARKET}} : <span>{{exchange.PRICE}}</span></div>
+          <a md-button flex>View Detail</a>
+          <a md-button flex>Add to Watch list</a>
         </div>
       </md-menu>
     </md-grid-tile>

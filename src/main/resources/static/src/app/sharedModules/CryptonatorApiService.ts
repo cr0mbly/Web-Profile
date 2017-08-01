@@ -10,8 +10,9 @@ export class CryptonatorApiService {
     "root" : "https://www.cryptocompare.com",
     "api"  : "/api/",
     "data" : "data/",
-    "coinList" : "coinlist/",
-    "coinSnapshot" : "coinsnapshot"
+    "coinList" : "coinlist",
+    "coinsnapshotByID" : "coinsnapshotfullbyid/",
+    "coinsnapshot" : "coinsnapshot/"
   };
 
   constructor(private _http:Http) {
@@ -26,15 +27,11 @@ export class CryptonatorApiService {
 
   getCoinSnapshot(coinID,currencyType) : Observable<any> {
 
-    let URLparams : URLSearchParams = new URLSearchParams();
-    URLparams.set("fsym" , coinID);
-    URLparams.set("tsym" , currencyType);
-
-    let options = new RequestOptions({ search: URLparams});
+    // TODO there's an issue where url prama aren't being set the angular way. needs to be resolved
 
     return this._http.get(
       this.CryptoPaths.root + this.CryptoPaths.api + this.CryptoPaths.data
-            + this.CryptoPaths.coinSnapshot + "?fsym=" + coinID + "&tsym=" + currencyType)
+            + this.CryptoPaths.coinsnapshot + "?fsym=" + coinID + "&tsym=BTC")
       .map(res => res.json())
       .catch(CryptonatorApiService.handleError);
   };

@@ -1,3 +1,7 @@
 .mainCard {
   height: 100%;
 }
+
+.gridSpacer {
+  margin: 10px 10px 10px 10px;
+}
