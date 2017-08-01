@@ -25,9 +25,6 @@ public class UserLoginRepo {
     public User findByUserID(String userID){
         return userLoginService.findByUserID(userID);
     }
-    public User findByUserRole(String role){
-        return userLoginService.findByUserID(role);
-    }
     public void save(User user){
         userLoginService.save(user);
     }

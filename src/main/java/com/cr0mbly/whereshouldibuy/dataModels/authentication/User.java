@@ -3,6 +3,8 @@ package com.cr0mbly.whereshouldibuy.dataModels.authentication;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 /**
  * Created by HoulihanA on 12/07/2017.
  */
@@ -18,6 +20,7 @@ public class User {
     private String password;
     private Roles role;
     private Boolean loggedIn;
+    private List<String> savedCoins;
 
     public User(){}
 
@@ -85,6 +88,14 @@ public class User {
 
     public void setLoggedIn(Boolean loggedIn) {
         this.loggedIn = loggedIn;
+    }
+
+    public List<String> getSavedCoins() {
+        return savedCoins;
+    }
+
+    public void setSavedCoins(List<String> savedCoins) {
+        this.savedCoins = savedCoins;
     }
 
 

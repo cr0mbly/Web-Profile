@@ -71,4 +71,35 @@ public class ProfileController {
 
     }
 
+    @RequestMapping(value = "/crypto/trackedCoins/{userID}/", method = RequestMethod.POST)
+    public  String saveWatchedCoins(@PathVariable("userID") String userID, @RequestBody List<String> savedCoins ) throws Exception {
+        JsonObject returnObj = new JsonObject();
+
+        User currentUser = userLoginRepo.findByUserID(userID);
+
+        if(currentUser == null){
+            throw new Exception("invalid user");
+        }
+
+        currentUser.setSavedCoins(savedCoins);
+        userLoginRepo.save(currentUser);
+
+        returnObj.addProperty("result", "coin list updated!");
+        return returnObj.toString();
+
+    }
+
+    @RequestMapping(value = "/crypto/trackedCoins/{userID}/", method = RequestMethod.GET)
+    public  List<String> saveWatchedCoins(@PathVariable("userID") String userID) throws Exception {
+
+        User currentUser = userLoginRepo.findByUserID(userID);
+
+        if(currentUser == null){
+            throw new Exception("invalid user");
+        }
+
+        return currentUser.getSavedCoins();
+
+
+    }
 }
